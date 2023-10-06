@@ -1,23 +1,23 @@
 
 package hotel_ideal.entidades;
 
-public class Habitaciones {
+public class Habitacion {
     private int idHabitacion;
     private TipoDeHabitación tipo;
     private int piso;
     private boolean estado;
 
-    public Habitaciones(TipoDeHabitación tipo, int piso, boolean estado) {
+    public Habitacion(TipoDeHabitación tipo, int piso, boolean estado) {
         this.tipo = tipo;
         this.piso = piso;
         this.estado = estado;
     }
 
-    public Habitaciones(int idHabitacion) {
+    public Habitacion(int idHabitacion) {
         this.idHabitacion = idHabitacion;
     }
 
-    public Habitaciones() {
+    public Habitacion() {
     }
 
     public int getIdHabitacion() {

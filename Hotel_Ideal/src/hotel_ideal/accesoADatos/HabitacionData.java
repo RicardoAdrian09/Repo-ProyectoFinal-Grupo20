@@ -18,6 +18,7 @@ public class HabitacionData {
     }
     
     public void altaHabitacion(Habitaciones habitacion){
+    public void altaHabitacion(Habitacion habitacion){
         try {
             String sql ="INSERT INTO habitacion(idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
             PreparedStatement ps;
@@ -38,7 +39,7 @@ public class HabitacionData {
         }
     }
     
-    public void modificarHabitacion(Habitaciones habitacion){
+    public void modificarHabitacion(Habitacion habitacion){
         try {
             String sql = "UPDATE habitacion SET idTipoDeHabitacion=?,piso=? WHERE idHabitacion=?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -57,7 +58,7 @@ public class HabitacionData {
             Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void bajaHabitacion(Habitaciones habitacion){
+    public void bajaHabitacion(Habitacion habitacion){
         String sql = "DELETE FROM habitacion WHERE idHabitacion = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);

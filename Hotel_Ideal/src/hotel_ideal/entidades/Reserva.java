@@ -6,13 +6,13 @@ import java.time.LocalDate;
 public class Reserva {
     private int idReserva;
     private Huesped huesped;
-    private Habitaciones habitacion;
+    private Habitacion habitacion;
     private double precioFinal;
     private LocalDate fechaFin;
     private LocalDate fechaInicio;
     private boolean activo;
 
-    public Reserva(Huesped huesped, Habitaciones habitacion, double precioFinal, LocalDate fechaFin, LocalDate fechaInicio, boolean activo) {
+    public Reserva(Huesped huesped, Habitacion habitacion, double precioFinal, LocalDate fechaFin, LocalDate fechaInicio, boolean activo) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.precioFinal = precioFinal;
@@ -44,11 +44,11 @@ public class Reserva {
         this.huesped = huesped;
     }
 
-    public Habitaciones getHabitacion() {
+    public Habitacion getHabitacion() {
         return habitacion;
     }
 
-    public void setHabitacion(Habitaciones habitacion) {
+    public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
 
