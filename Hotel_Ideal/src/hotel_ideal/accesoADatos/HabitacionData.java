@@ -23,13 +23,13 @@ public class HabitacionData {
             String sql ="INSERT INTO habitacion(idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
-            ps.setObject(1, habitacion.getTipo());
+            ps.setInt(1, habitacion.getIdTipoDeHab());
             ps.setInt(2, habitacion.getPiso());
             ps.setBoolean(3, true);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
+                habitacion.setIdHabitacion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se añadio una habitacion con exito");
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo añadir la habitacion ");

@@ -23,22 +23,26 @@ public class Hotel_Ideal {
 
 
 
-        Huesped huesped = new Huesped(1, "Pepe", "Argento", "calle 2", "pepe@gmail.com", "12345");
-        HuespedData huespedData = new HuespedData();
+//        Huesped huesped = new Huesped(1, "Pepe", "Argento", "calle 2", "pepe@gmail.com", "12345");
+//        HuespedData huespedData = new HuespedData();
 
-        huespedData.modificarHuesped(huesped);
-    }
+//        huespedData.modificarHuesped(huesped);
+    
 
      // pruebas de metodos HabitacionData 
     
     
     
-        TipoDeHabitación tdh= new TipoDeHabitación(1);
+     //   TipoDeHabitación tdh= new TipoDeHabitación(1);
        
-        Habitacion habitacion =new Habitacion ();
+        Habitacion habitacion =new Habitacion (1,1);
        
-        HabitacionData hd= new HabitacionData ();
-       
+        HabitacionData hd = new HabitacionData();
+        
+        hd.altaHabitacion(habitacion);
+    
+    }   
+        
         
 
         
