@@ -1,7 +1,7 @@
 
 package hotel_ideal.accesoADatos;
 
-import hotel_ideal.entidades.Habitaciones;
+import hotel_ideal.entidades.Habitacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class HabitacionData {
     public HabitacionData() {
     }
     
-    public void altaHabitacion(Habitaciones habitacion){
+    
     public void altaHabitacion(Habitacion habitacion){
         try {
             String sql ="INSERT INTO habitacion(idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
