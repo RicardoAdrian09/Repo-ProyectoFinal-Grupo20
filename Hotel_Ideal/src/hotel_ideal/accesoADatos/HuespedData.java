@@ -78,7 +78,8 @@ public class HuespedData {
             ps.setString(3, huesped.getDomicilio());
             ps.setString(4, huesped.getCorreo());
             ps.setString(5, huesped.getCelular());
-            ps.setInt(6,huesped.getIdHuesped());
+            ps.setInt(6, huesped.getIdHuesped());
+
 
             int exito = ps.executeUpdate();
 
