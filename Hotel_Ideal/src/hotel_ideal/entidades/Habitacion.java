@@ -3,7 +3,7 @@ package hotel_ideal.entidades;
 
 public class Habitacion {
     private int idHabitacion;
-    private TipoDeHabitación tipo;
+    private TipoDeHabitación tipo;   
     private int piso;
     private boolean estado;
 
