@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class HabitacionData {
         try {
             String sql ="INSERT INTO habitacion(idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
             PreparedStatement ps;
-            ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, habitacion.getIdTipoDeHab());
             ps.setInt(2, habitacion.getPiso());
             ps.setBoolean(3, true);
