@@ -24,9 +24,9 @@ public class HabitacionData {
             String sql ="INSERT INTO habitacion(idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
             PreparedStatement ps;
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, habitacion.getIdTipoDeHab());
-            ps.setInt(2, habitacion.getPiso());
-            ps.setBoolean(3, true);
+            ps.setInt(1, habitacion.getIdTipoDeHab());   // tipo de habitacion
+            ps.setInt(2, habitacion.getPiso());          //  en que piso se da d ealta la habitacion
+            ps.setBoolean(3, true);                      // si esta en servicio 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -40,14 +40,17 @@ public class HabitacionData {
         }
     }
     
-    public void modificarHabitacion(Habitacion habitacion){
+    public void modificarHabitacion( Habitacion habitacion){
         try {
             String sql = "UPDATE habitacion SET idTipoDeHabitacion=?,piso=? WHERE idHabitacion=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps = con.prepareStatement(sql);
-            ps.setObject(1, habitacion.getTipo());
+            
+            ps.setInt(1, habitacion.getIdTipoDeHab());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.getIdHabitacion());
+            
+            
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "La habitacion ha sido modificada exitosamente");

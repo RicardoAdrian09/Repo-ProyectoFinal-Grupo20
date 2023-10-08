@@ -21,6 +21,17 @@ public class Habitacion {
         this.piso = piso;
         this.estado = estado;
     }
+    
+    public Habitacion (int idTipoDeHab, int piso , int idHabitacion ) {
+         this.idTipoDeHab = idTipoDeHab;
+         this.piso =  piso;
+        this.idHabitacion= idHabitacion;
+        
+       
+       
+    }
+     
+    
     public Habitacion(int idTipoDeHab, int piso) {
         this.idTipoDeHab = idTipoDeHab;
         this.piso = piso;
