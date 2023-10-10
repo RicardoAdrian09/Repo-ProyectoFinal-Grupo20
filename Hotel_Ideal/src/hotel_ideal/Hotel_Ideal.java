@@ -35,13 +35,13 @@ public class Hotel_Ideal {
     
      //   TipoDeHabitación tdh= new TipoDeHabitación(1);
        
-        Habitacion habitacion =new Habitacion (2,2,2);
+//      Habitacion habitacion =new Habitacion (2,2,2);
        
-        HabitacionData hd = new HabitacionData();
+//        HabitacionData hd = new HabitacionData();
         
 ////        hd.bajaHabitacion(habitacion);
         
-            hd.modificarHabitacion(habitacion);
+//            hd.modificarHabitacion(habitacion);
         
         
     

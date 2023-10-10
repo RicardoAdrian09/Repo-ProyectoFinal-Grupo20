@@ -127,7 +127,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        Huesped vi = new Huesped();
+        VistaHuesped vi = new VistaHuesped();
         vi.setVisible(true);  // Muestra pantalla Vista Inscripciones.
         escritorio.add(vi);
         escritorio.moveToFront(vi);
