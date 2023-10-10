@@ -32,21 +32,27 @@ public class ReservaData {
 
     public void crearReserva( Reserva reserva) {
 
-        String sql = "INSERT INTO reserva (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,cantPersonas,cantidadDeDias,activo) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO reserva (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,cantidadDeDias,activo) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
+            
+            
+            
+            
+            
+            
 
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 
             ps = con.prepareStatement(sql);
-            ps.setString(1, reserva.getHabitacion(getIdHabitacion()));
-            ps.setInt(2, reserva.getHuesped(getIdHuesped));
+            ps.setInt(1,reserva.getHabitacion().getIdHabitacion());
+            ps.setInt(2, reserva.getHuesped().getIdHuesped());
             ps.setDate(3, Date.valueOf(reserva.getFechaInicio()));
-            ps.setDate(4, Date.valueOf(reserva.getFechaFin));
-            ps.setDouble(5, reserva.getPrecioFinal);
-            ps.setInt(6, reserva.getCantidadPersonas);
-            ps.setInt(7, reserva.getCantidadDeDias);
-            ps.setBoolean(8, isActivo());
+            ps.setDate(4, Date.valueOf(reserva.getFechaFin()));
+            ps.setDouble(5, reserva.getPrecioFinal());
+            ps.setInt(6,reserva.);
+            ps.setInt(7,reserva.);
+            ps.setBoolean(8,true);
 
             ps.executeUpdate();
 
