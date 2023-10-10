@@ -46,12 +46,12 @@ public class HuespedData {
 
     }
     
-    public void eliminarHuesped(int id) {
+    public void eliminarHuesped(int dni) {
 
         try {
-            String sql = "UPDATE huesped SET activo=0 WHERE idHuesped = ? ";
+            String sql = "UPDATE huesped SET activo=0 WHERE dni = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             int fila = ps.executeUpdate();
 
             if (fila == 1) {
@@ -68,18 +68,20 @@ public class HuespedData {
     
     public void modificarHuesped(Huesped huesped) {
         
-        String sql = "UPDATE huesped  SET nombre=?, apellido=? , domicilio=?,"
+        String sql = "UPDATE huesped  SET nombre=?, apellido=?, dni=?, domicilio=?,"
                 + "correo=?,celular=?,activo=?  WHERE idHuesped = ?";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, huesped.getNombre());
             ps.setString(2, huesped.getApellido());
-            ps.setString(3, huesped.getDomicilio());
-            ps.setString(4, huesped.getCorreo());
-            ps.setString(5, huesped.getCelular());
-            ps.setBoolean(6, huesped.isActivo());
-            ps.setInt(7, huesped.getIdHuesped());
+            ps.setInt(3, huesped.getDni());
+            ps.setString(4, huesped.getDomicilio());
+            ps.setString(5, huesped.getCorreo());
+            ps.setString(6, huesped.getCelular());
+            ps.setBoolean(7, huesped.isActivo());
+            ps.setInt(8, huesped.getIdHuesped());
+            
 
             int exito = ps.executeUpdate();
 
@@ -95,6 +97,40 @@ public class HuespedData {
 
         }
     
+    }
+    
+    public Huesped buscarHuespedPorDni(int dni) {
+
+        Huesped huesped = null;
+        String sql = "SELECT idHuesped, nombre, apellido, dni, domicilio, correo, celular, activo FROM dni WHERE ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                huesped = new Huesped();
+                huesped.setIdHuesped(rs.getInt("idHuesped"));
+                huesped.setNombre(rs.getString("nombre"));
+                huesped.setApellido(rs.getString("apellido"));
+                huesped.setDni(rs.getInt("dni"));
+                huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setCorreo(rs.getString("correo"));
+                huesped.setCelular(rs.getString("celular"));
+                huesped.setActivo(rs.getBoolean("activo"));
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, "El huesped no existe");
+
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped"+ex.getMessage());
+        }
+
+        return huesped;
     }
     
 }
