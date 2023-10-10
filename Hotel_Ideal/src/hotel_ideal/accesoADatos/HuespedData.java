@@ -69,7 +69,7 @@ public class HuespedData {
     public void modificarHuesped(Huesped huesped) {
         
         String sql = "UPDATE huesped  SET nombre=?, apellido=? , domicilio=?,"
-                + "correo=?,celular=?  WHERE idHuesped = ?";
+                + "correo=?,celular=?,activo=?  WHERE idHuesped = ?";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -78,8 +78,8 @@ public class HuespedData {
             ps.setString(3, huesped.getDomicilio());
             ps.setString(4, huesped.getCorreo());
             ps.setString(5, huesped.getCelular());
-            ps.setInt(6, huesped.getIdHuesped());
-
+            ps.setBoolean(6, huesped.isActivo());
+            ps.setInt(7, huesped.getIdHuesped());
 
             int exito = ps.executeUpdate();
 

@@ -6,6 +6,7 @@
 package hotel_ideal.vistas;
 
 import hotel_ideal.accesoADatos.HuespedData;
+import hotel_ideal.entidades.Huesped;
 
 /**
  *
@@ -191,7 +192,16 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
     private void jBAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAltaActionPerformed
         // TODO add your handling code here:
+        String nombre = jTNombre.getText();
+        String apellido = jTApellido.getText();
+        int dni = Integer.parseInt(jTDni.getText()); 
+        String domicilio = jTDomicilio.getText();
+        String correo = jTCorreo.getText();
+        String celular = jTCelular.getText();
+        
+        Huesped h = new Huesped(nombre,apellido,dni,domicilio,correo,celular);
         HuespedData hd = new HuespedData();
+        hd.altaHuesped(h);
     }//GEN-LAST:event_jBAltaActionPerformed
 
     private void jTCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCelularActionPerformed

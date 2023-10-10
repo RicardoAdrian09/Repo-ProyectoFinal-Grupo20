@@ -23,10 +23,10 @@ public class Huesped {
         this.activo = activo;
     }
 
-    public Huesped(int id ,String nombre, String apellido, String domicilio, String correo, String celular) {
-        this.idHuesped = id;
+    public Huesped(String nombre, String apellido, int dni, String domicilio, String correo, String celular) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.domicilio = domicilio;
         this.correo = correo;
         this.celular = celular;
