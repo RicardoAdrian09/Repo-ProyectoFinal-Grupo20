@@ -252,7 +252,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jTDomicilio.setText(h.getDomicilio());
         jTCorreo.setText(h.getCorreo());
         jTCelular.setText(h.getCelular());
-//      jRBEstado.set
+        jRBEstado.setSelected(h.isActivo());
         
     }//GEN-LAST:event_jBBuscarActionPerformed
 
