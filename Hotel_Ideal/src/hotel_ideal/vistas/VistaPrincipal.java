@@ -31,7 +31,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -68,13 +68,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Gestion de Huesped");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMHuesped.setText("Gestion de Huesped");
+        jMHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMHuespedActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMHuesped);
 
         jMenuBar1.add(jMenu1);
 
@@ -123,7 +123,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMHuespedActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -131,7 +131,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         vi.setVisible(true);  // Muestra pantalla Vista Inscripciones.
         escritorio.add(vi);
         escritorio.moveToFront(vi);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMHuespedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,11 +171,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuItem jMHuesped;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
