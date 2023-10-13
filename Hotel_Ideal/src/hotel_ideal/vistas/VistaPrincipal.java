@@ -88,6 +88,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Reservas");
 
         jMenuItem3.setText("Gestion de Reservas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
@@ -132,6 +137,22 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.add(vi);
         escritorio.moveToFront(vi);
     }//GEN-LAST:event_jMHuespedActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaReserva vi = new VistaReserva();
+        vi.setVisible(true);  // Muestra pantalla Vista Inscripciones.
+        escritorio.add(vi);
+        escritorio.moveToFront(vi);
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,32 +7,51 @@ public class Reserva {
     private int idReserva;
     private Huesped huesped;
     private Habitacion habitacion;
-    private double precioFinal;
     private LocalDate fechaFin;
     private LocalDate fechaInicio;
+    private double precioFinal;
+    private int cantidadDeDias;   
+
     private boolean activo;
 
-    public Reserva(Huesped huesped, Habitacion habitacion, double precioFinal, LocalDate fechaFin, LocalDate fechaInicio, boolean activo) {
-        this.huesped = huesped;
-        this.habitacion = habitacion;
-        this.precioFinal = precioFinal;
-        this.fechaFin = fechaFin;
+    
+     // constructor para modificar reserva.
+    
+    public Reserva( LocalDate fechaInicio, LocalDate fechaFin,double precioFinal, boolean activo , int idReserva ) {
         this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.precioFinal = precioFinal;
         this.activo = activo;
+        this.idReserva=idReserva;
     }
 
+     // constructor completo para Alta reserva.
+    
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin,double precioFinal,int cantidadDeDias, boolean activo) {
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.precioFinal = precioFinal;
+        this.cantidadDeDias=cantidadDeDias;
+        this.activo = activo;
+    }
+   
+    
+      // constructor solo de idReserva
+    
     public Reserva(int idReserva) {
         this.idReserva = idReserva;
     }
-
+     // constructor vacio 
     public Reserva() {
     }
 
-    public int getIdReserva() {
+    public int getidReserva() {
         return idReserva;
     }
 
-    public void setIdReserva(int idReserva) {
+    public void setidReserva(int idReserva) {
         this.idReserva = idReserva;
     }
 
@@ -82,6 +101,14 @@ public class Reserva {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public int getCantidadDeDias() {
+        return cantidadDeDias;
+    }
+
+    public void setCantidadDeDias(int cantidadDeDias) {
+        this.cantidadDeDias = cantidadDeDias;
     }
 
     
