@@ -60,22 +60,6 @@ public class ReservaData {
         }
     }
 
-    public void eliminarReserva(int id) {
-        String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Alumno Eliminado exitosamente!");
-            }
-
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno al eliminar" + ex.getMessage());
-        }
-    }
 
     public void eliminarReservaPorId(int id) {
         String sql = "DELETE FROM reserva WHERE idReserva = ?";

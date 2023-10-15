@@ -1,4 +1,3 @@
-
 package hotel_ideal.vistas;
 
 import hotel_ideal.accesoADatos.HabitacionData;
@@ -14,12 +13,13 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class VistaReserva extends javax.swing.JInternalFrame {
 
     private HabitacionData hd = new HabitacionData();
+    private ReservaData rd = new ReservaData();
 
-   
     public VistaReserva() {
         initComponents();
         jTCantidadDias.setEnabled(false);
@@ -43,7 +43,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLHuesped = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTDni = new javax.swing.JTextField();
-        jTHuesped = new javax.swing.JTextField();
+        jtIdReserva = new javax.swing.JTextField();
         jBGuardar = new javax.swing.JButton();
         jCHabitacionesDisponbiles = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
@@ -52,11 +52,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jTPrecioTotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jBLimpiar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
         jTCantidadPersonas = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jTHuesped1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setTitle("Reservas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -66,8 +68,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 14, 241, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("Datos Huesped :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jLabel2.setText("ID: ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 710, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("Tipo de Habitacion : ");
@@ -96,9 +98,10 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setText("DNI Huesped:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
-        getContentPane().add(jTDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 96, 35));
-        getContentPane().add(jTHuesped, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 410, 35));
+        getContentPane().add(jTDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 96, 30));
+        getContentPane().add(jtIdReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 700, 300, 30));
 
+        jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBGuardar.setText("Generar Reserva");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,56 +113,75 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jCHabitacionesDisponbiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
         getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 200, 32));
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel8.setText("Cantidad de dias :");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, -1, 33));
 
         jTCantidadDias.setBackground(new java.awt.Color(153, 153, 153));
-        getContentPane().add(jTCantidadDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 560, 144, 33));
+        getContentPane().add(jTCantidadDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 570, 144, 33));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Lista Habitaciones Disponibles :");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
 
         jTPrecioTotal.setBackground(new java.awt.Color(153, 153, 153));
-        getContentPane().add(jTPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 620, 144, 33));
+        getContentPane().add(jTPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, 144, 33));
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Precio Total :");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 630, -1, -1));
 
+        jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBLimpiar.setText("Limpiar");
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 680, -1, -1));
+        getContentPane().add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 810, -1, -1));
 
-        jButton2.setText("Eliminar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 680, -1, -1));
+        jbEliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 770, -1, -1));
 
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 680, -1, -1));
+        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 810, -1, -1));
 
-        jButton4.setText("Modificar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 680, -1, -1));
-        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 230, -1));
+        jbModificar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 770, -1, -1));
+        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 204, 230, 30));
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Cantidad de personas: ");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        getContentPane().add(jTHuesped1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 400, 30));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setText("Datos Huesped :");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-    
-        ReservaData rd = new ReservaData();
         Reserva guardaReserva = new Reserva();
 
         // EXTRAIGO LOS VALORES DE LOS CONTENEDORES DE LA VISTA Y LOS PASO A VARIABLES.
@@ -224,13 +246,35 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try {
+            int idAEliminar = Integer.parseInt(jtIdReserva.getText());
+            ReservaData reservaAEliminar = new ReservaData();
+
+            // Mostrar un cuadro de diálogo de confirmación para eliminar el proveedor, para evitar accidentes.
+            int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar esta reserva", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+                reservaAEliminar.eliminarReservaPorId(idAEliminar);
+                limpiarCampos();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: Debe ingresar un código válido.", "Error de Entrada", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+      
+    }//GEN-LAST:event_jbModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<TipoDeHabitacion> jCBTipoHabitacion;
     private javax.swing.JComboBox<String> jCHabitacionesDisponbiles;
     private com.toedter.calendar.JDateChooser jDFechaEntrada;
@@ -239,6 +283,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLHuesped;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -250,14 +295,17 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTCantidadDias;
     private javax.swing.JTextField jTCantidadPersonas;
     private javax.swing.JTextField jTDni;
-    private javax.swing.JTextField jTHuesped;
+    private javax.swing.JTextField jTHuesped1;
     private javax.swing.JTextField jTPrecioTotal;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbModificar;
+    private javax.swing.JTextField jtIdReserva;
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
 
         jTDni.setText("");
-        jTHuesped.setText("");
+        jtIdReserva.setText("");
         jTCantidadPersonas.setText("");
         jDFechaEntrada.setDate(null);
         jDFechaSalida.setDate(null);
@@ -267,17 +315,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     }
 
-   
-
     private void cargarCBTipoDeHabitaciones() {
-        
+
         TipoDeHabitacionData thd = new TipoDeHabitacionData();
 
         for (TipoDeHabitacion tipodehabitaciones : thd.listarTipoDeHabitaciones()) {
             jCBTipoHabitacion.addItem(tipodehabitaciones);
         }
     }
-
-
 
 }
