@@ -1,7 +1,7 @@
 
 package hotel_ideal.entidades;
 
-public class TipoDeHabitación {
+public class TipoDeHabitacion {
     private int idTipoDeHabitacion;
      private String tipo;
     private int cantPersonas;
@@ -9,7 +9,7 @@ public class TipoDeHabitación {
     private String tipoDeCama;
     private int precioPorNoche;
 
-    public TipoDeHabitación(int idTipoDeHabitacion, String tipo, int cantPersonas, int cantCamas, String tipoDeCama, int precioPorNoche) {
+    public TipoDeHabitacion(int idTipoDeHabitacion, String tipo, int cantPersonas, int cantCamas, String tipoDeCama, int precioPorNoche) {
         this.idTipoDeHabitacion = idTipoDeHabitacion;
         this.tipo = tipo;
         this.cantPersonas = cantPersonas;
@@ -18,7 +18,7 @@ public class TipoDeHabitación {
         this.precioPorNoche = precioPorNoche;
     }
 
-    public TipoDeHabitación(String tipo, int cantPersonas, int cantCamas, String tipoDeCama, int precioPorNoche) {
+    public TipoDeHabitacion(String tipo, int cantPersonas, int cantCamas, String tipoDeCama, int precioPorNoche) {
         this.tipo = tipo;
         this.cantPersonas = cantPersonas;
         this.cantCamas = cantCamas;
@@ -26,11 +26,11 @@ public class TipoDeHabitación {
         this.precioPorNoche = precioPorNoche;
     }
     
-    public TipoDeHabitación(int idTipoDeHabitacion) {
+    public TipoDeHabitacion(int idTipoDeHabitacion) {
         this.idTipoDeHabitacion = idTipoDeHabitacion;
     }
 
-    public TipoDeHabitación() {
+    public TipoDeHabitacion() {
     }
 
     public String getTipo() {
@@ -79,6 +79,11 @@ public class TipoDeHabitación {
 
     public void setTipoDeCama(String tipoDeCama) {
         this.tipoDeCama = tipoDeCama;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + idTipoDeHabitacion + ", Tipo: " + tipo + ", Cantidad de personas: " + cantPersonas + ", Cantidad de camas: " + cantCamas + ", Tipo de cama: " + tipoDeCama + ", Precio por noche: " + precioPorNoche;
     }
 
     

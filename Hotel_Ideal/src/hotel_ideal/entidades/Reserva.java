@@ -10,6 +10,7 @@ public class Reserva {
     private LocalDate fechaFin;
     private LocalDate fechaInicio;
     private double precioFinal;
+    private int cantPersonas;
     private int cantidadDeDias;   
 
     private boolean activo;
@@ -27,7 +28,7 @@ public class Reserva {
 
      // constructor completo para Alta reserva.
     
-    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin,double precioFinal,int cantidadDeDias, boolean activo) {
+    public Reserva(Huesped huesped, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin,double precioFinal,int cantPersonas ,int cantidadDeDias, boolean activo) {
         this.huesped = huesped;
         this.habitacion = habitacion;
         this.fechaInicio = fechaInicio;
@@ -43,10 +44,13 @@ public class Reserva {
     public Reserva(int idReserva) {
         this.idReserva = idReserva;
     }
-     // constructor vacio 
-    public Reserva() {
-    }
 
+    public Reserva() {
+        
+    }
+    
+      // guetter and setters 
+    
     public int getidReserva() {
         return idReserva;
     }
@@ -55,6 +59,8 @@ public class Reserva {
         this.idReserva = idReserva;
     }
 
+    
+      //  hueped 
     public Huesped getHuesped() {
         return huesped;
     }
@@ -62,7 +68,7 @@ public class Reserva {
     public void setHuesped(Huesped huesped) {
         this.huesped = huesped;
     }
-
+      // habitacion
     public Habitacion getHabitacion() {
         return habitacion;
     }
@@ -70,15 +76,22 @@ public class Reserva {
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
-
+      // precio final 
     public double getPrecioFinal() {
         return precioFinal;
     }
 
+      public void getPrecioFinal(double precioFinal) {    // creado automaticamente
+        
+    }
+    
     public void setPrecioFinal(double precioFinal) {
         this.precioFinal = precioFinal;
     }
 
+
+    // fecha fin 
+    
     public LocalDate getFechaFin() {
         return fechaFin;
     }
@@ -86,7 +99,7 @@ public class Reserva {
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
-
+       // fecha inicio 
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
@@ -94,7 +107,7 @@ public class Reserva {
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
-
+      // estado 
     public boolean isActivo() {
         return activo;
     }
@@ -103,6 +116,8 @@ public class Reserva {
         this.activo = activo;
     }
 
+        // cantidad de dias 
+    
     public int getCantidadDeDias() {
         return cantidadDeDias;
     }
@@ -110,6 +125,18 @@ public class Reserva {
     public void setCantidadDeDias(int cantidadDeDias) {
         this.cantidadDeDias = cantidadDeDias;
     }
+
+    public int getCantPersonas() {
+        return cantPersonas;
+    }
+
+    public void setCantPersonas(int cantPersonas) {
+        this.cantPersonas = cantPersonas;
+    }
+
+  
+
+   
 
     
     

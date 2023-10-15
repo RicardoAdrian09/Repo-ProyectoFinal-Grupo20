@@ -28,7 +28,7 @@ public class ReservaData {
 
     public void crearReserva(Reserva reserva) {
 
-        String sql = "INSERT INTO reserva (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,cantidadDeDias, activo) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO reserva (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,cantPersonas,cantidadDeDias, activo) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
 
@@ -40,15 +40,17 @@ public class ReservaData {
             ps.setDate(3, Date.valueOf(reserva.getFechaInicio()));
             ps.setDate(4, Date.valueOf(reserva.getFechaFin()));
             ps.setDouble(5, reserva.getPrecioFinal());
-            ps.setInt(6, reserva.getCantidadDeDias());
-            ps.setBoolean(7, true);
+            ps.setInt(6, reserva.getCantPersonas());
+            ps.setInt(7, reserva.getCantidadDeDias());
+            ps.setBoolean(8, true);
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
+
             if (rs.next()) {
                 reserva.setidReserva(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Reserva generada con exito");
+                JOptionPane.showMessageDialog(null, "Reserva  generada  satisfatoriamente. ID RESERVA generaDo :   " + rs.getInt(1));
             }
 
             ps.close();

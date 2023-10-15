@@ -3,19 +3,19 @@ package hotel_ideal.entidades;
 
 public class Habitacion {
     private int idHabitacion;
-    private TipoDeHabitación tipo;
+    private TipoDeHabitacion tipo;
     private int idTipoDeHab;
     private int piso;
     private boolean estado;
 
-    public Habitacion(int idHabitacion, TipoDeHabitación tipo, int idTipoDeHab, int piso, boolean estado) {
+    public Habitacion(int idHabitacion, TipoDeHabitacion tipo, int idTipoDeHab, int piso, boolean estado) {
         this.idHabitacion = idHabitacion;
         this.tipo = tipo;
         this.idTipoDeHab = idTipoDeHab;
         this.piso = piso;
         this.estado = estado;
     }
-    public Habitacion(TipoDeHabitación tipo, int idTipoDeHab, int piso, boolean estado) {
+    public Habitacion(TipoDeHabitacion tipo, int idTipoDeHab, int piso, boolean estado) {
         this.tipo = tipo;
         this.idTipoDeHab = idTipoDeHab;
         this.piso = piso;
@@ -59,11 +59,11 @@ public class Habitacion {
         this.idHabitacion = idHabitacion;
     }
 
-    public TipoDeHabitación getTipo() {
+    public TipoDeHabitacion getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoDeHabitación tipo) {
+    public void setTipo(TipoDeHabitacion tipo) {
         this.tipo = tipo;
     }
 
