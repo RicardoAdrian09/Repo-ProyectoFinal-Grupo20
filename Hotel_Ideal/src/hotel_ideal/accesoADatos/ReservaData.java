@@ -40,9 +40,15 @@ public class ReservaData {
             ps.setDate(3, Date.valueOf(reserva.getFechaInicio()));
             ps.setDate(4, Date.valueOf(reserva.getFechaFin()));
             ps.setDouble(5, reserva.getPrecioFinal());
+<<<<<<< Updated upstream
             ps.setInt(6, reserva.getCantPersonas());
             ps.setInt(7, reserva.getCantidadDeDias());
             ps.setBoolean(8, true);
+=======
+//            ps.setInt(6,reserva.);
+//            ps.setInt(7,reserva.);
+            ps.setBoolean(8,true);
+>>>>>>> Stashed changes
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
