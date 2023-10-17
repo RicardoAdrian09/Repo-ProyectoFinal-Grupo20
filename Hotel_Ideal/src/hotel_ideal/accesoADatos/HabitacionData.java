@@ -226,4 +226,33 @@ public class HabitacionData {
         return habitaciones;
     }
 
+    public List<Habitacion> obtenerHabitaciones(){
+        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+            
+
+        try {
+            String sql = "SELECT * FROM habitacion;";
+            
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            
+            Habitacion habitacion;
+            while(resultSet.next()){
+                habitacion = new Habitacion();
+                habitacion.setIdHabitacion(resultSet.getInt("idHabitacion"));
+                habitacion.setIdTipoDeHab(resultSet.getInt("idTipoDeHabitacion"));
+                habitacion.setPiso(resultSet.getInt("piso"));
+                habitacion.setEstado(resultSet.getBoolean("estado"));
+                                                                
+                habitaciones.add(habitacion);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener una Habitacion: " + ex.getMessage());
+        }
+        
+        
+        return habitaciones;
+    }
+    
 }

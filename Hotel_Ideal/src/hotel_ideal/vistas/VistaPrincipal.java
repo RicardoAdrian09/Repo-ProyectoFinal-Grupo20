@@ -24,7 +24,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmHabitaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -80,9 +80,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Habitaciones");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jMenuItem2.setText("Gestion de Habitaciones");
-        jMenu2.add(jMenuItem2);
+        jmHabitaciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jmHabitaciones.setText("Gestion de Habitaciones");
+        jmHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmHabitacionesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmHabitaciones);
 
         jMenuBar1.add(jMenu2);
 
@@ -107,8 +112,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMHuespedActionPerformed
@@ -131,15 +134,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.add(vi);
         escritorio.moveToFront(vi);
         
-        
-        
-        
-        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-
-
-
+    private void jmHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHabitacionesActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        VistaHabitacion vh = new VistaHabitacion();
+        vh.setVisible(true);  // Muestra pantalla Vista Inscripciones.
+        escritorio.add(vh);
+        escritorio.moveToFront(vh);
+    }//GEN-LAST:event_jmHabitacionesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
@@ -149,7 +154,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jmHabitaciones;
     // End of variables declaration//GEN-END:variables
 }
