@@ -5,17 +5,25 @@
  */
 package hotel_ideal.vistas;
 
+import hotel_ideal.accesoADatos.HabitacionData;
+import hotel_ideal.entidades.Habitacion;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author CX-Notebook
  */
 public class VistaHabitacion extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo2=new DefaultTableModel();
     /**
      * Creates new form VistaHabitacion
      */
     public VistaHabitacion() {
         initComponents();
+        armarCabeceraDesocupadas();
+        armarCabeceraOcupadas();
     }
 
     /**
@@ -39,6 +47,7 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtDesocupadas = new javax.swing.JTable();
+        jbCargarTablas = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Buscar Habitaciones");
@@ -72,21 +81,15 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
                 "N° Habitacion", "Tipo de Habitacion", "Piso"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtOcupadas.setToolTipText("Object");
         jScrollPane3.setViewportView(jtOcupadas);
         if (jtOcupadas.getColumnModel().getColumnCount() > 0) {
             jtOcupadas.getColumnModel().getColumn(0).setResizable(false);
@@ -104,27 +107,28 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
                 "N° Habitacion", "Tipo de Habitacion", "Piso"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jtDesocupadas.setToolTipText("Object");
         jScrollPane2.setViewportView(jtDesocupadas);
         if (jtDesocupadas.getColumnModel().getColumnCount() > 0) {
             jtDesocupadas.getColumnModel().getColumn(0).setResizable(false);
             jtDesocupadas.getColumnModel().getColumn(1).setResizable(false);
             jtDesocupadas.getColumnModel().getColumn(2).setResizable(false);
         }
+
+        jbCargarTablas.setText("Cargar Tablas");
+        jbCargarTablas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCargarTablasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +143,10 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(81, 81, 81)
+                            .addComponent(jbCargarTablas))
                         .addComponent(jLabel2)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(80, 80, 80)
@@ -159,15 +166,17 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(17, 17, 17)
-                .addComponent(jLabel4)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jbCargarTablas))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbTipoDeHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,7 +195,28 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoDeHabitacionActionPerformed
 
+    private void jbCargarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarTablasActionPerformed
+        // TODO add your handling code here:
+        cargarTablas();
+    }//GEN-LAST:event_jbCargarTablasActionPerformed
 
+    public void cargarTablas() {
+         HabitacionData hd = new HabitacionData();
+            List<Habitacion>hab = hd.obtenerHabitaciones();
+            for (Habitacion arg : hab) {
+                if (arg.isEstado()==false) {
+                    modelo.addRow(new Object[]{
+                arg.getIdHabitacion(),arg.getIdTipoDeHab(),arg.getPiso()
+                });
+                }else{
+                    modelo2.addRow(new Object[]{
+                arg.getIdHabitacion(),arg.getIdTipoDeHab(),arg.getPiso()
+                });
+                }
+                
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -196,9 +226,23 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jbAgregar;
+    private javax.swing.JButton jbCargarTablas;
     private javax.swing.JComboBox<String> jcbTipoDeHabitacion;
     private javax.swing.JTable jtDesocupadas;
     private javax.swing.JTable jtOcupadas;
     private javax.swing.JTextField jtPiso;
     // End of variables declaration//GEN-END:variables
+private void armarCabeceraOcupadas(){
+    modelo.addColumn("N° Habitacion");
+    modelo.addColumn("Tipo Habitacion");
+    modelo.addColumn("Piso");
+    jtOcupadas.setModel(modelo);
+}
+private void armarCabeceraDesocupadas(){
+    modelo2.addColumn("N° Habitacion");
+    modelo2.addColumn("Tipo Habitacion");
+    modelo2.addColumn("Piso");
+    jtDesocupadas.setModel(modelo2);
+}
+
 }
