@@ -19,13 +19,14 @@ import javax.swing.JOptionPane;
  * @author gtorre
  */
 public class TipoDeHabitacionData {
+
     Connection con = Conexion.getConexion();
 
     public TipoDeHabitacionData() {
     }
-    
-     public List<TipoDeHabitacion> listarTipoDeHabitaciones() {
-        String sql = "SELECT idTipoDeHabitacion, tipo, cantidadDePersonas, cantCamas, tipoDeCamas, precioPorNoche FROM tipodehabitacion";
+
+    public List<TipoDeHabitacion> listarTipoDeHabitaciones() {
+        String sql = "SELECT idTipoDeHabitacion, tipo, cantidadDePersonas, cantCamas, tipoDeCamas, precioPorNoche  FROM tipodehabitacion";
         List<TipoDeHabitacion> tipoDeHabitaciones = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -34,8 +35,9 @@ public class TipoDeHabitacionData {
             while (rs.next()) {
                 TipoDeHabitacion tipoDeHabitacion = new TipoDeHabitacion();
                 tipoDeHabitacion.setIdTipoDeHabitacion(rs.getInt("idTipoDeHabitacion"));
-                tipoDeHabitacion.setTipo(rs.getString("tipo"));
+                tipoDeHabitacion.setTipo(rs.getNString("tipo"));
                 tipoDeHabitacion.setCantPersonas(rs.getInt("cantidadDePersonas"));
+                tipoDeHabitacion.setCantCamas(rs.getInt("cantCamas"));
                 tipoDeHabitacion.setTipoDeCama(rs.getNString("tipoDeCamas"));
                 tipoDeHabitacion.setPrecioPorNoche(rs.getInt("precioPorNoche"));
 
@@ -47,10 +49,5 @@ public class TipoDeHabitacionData {
         }
         return tipoDeHabitaciones;
     }
-
-  
- 
-     
-     
 
 }

@@ -7,11 +7,8 @@ import hotel_ideal.entidades.Habitacion;
 import hotel_ideal.entidades.Huesped;
 import hotel_ideal.entidades.Reserva;
 import hotel_ideal.entidades.TipoDeHabitacion;
-import java.awt.List;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -25,6 +22,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jTCantidadDias.setEnabled(false);
         jTPrecioTotal.setEnabled(false);
         cargarCBTipoDeHabitaciones();
+//        llenarCBHabitacionesDisponible();
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +63,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Gestion de Reservas");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 14, 241, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 241, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("ID: ");
@@ -82,15 +80,15 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("Fecha Check OUT :");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
-        getContentPane().add(jDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 236, -1));
-        getContentPane().add(jDFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 236, -1));
+        getContentPane().add(jDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 240, 40));
+        getContentPane().add(jDFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 240, 40));
 
         jCBTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBTipoHabitacionActionPerformed(evt);
             }
         });
-        getContentPane().add(jCBTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 460, 38));
+        getContentPane().add(jCBTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 710, 38));
 
         jLHuesped.setForeground(new java.awt.Color(153, 153, 153));
         getContentPane().add(jLHuesped, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 317, 236, -1));
@@ -98,7 +96,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setText("DNI Huesped:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
-        getContentPane().add(jTDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 96, 30));
+        getContentPane().add(jTDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 90, 40));
         getContentPane().add(jtIdReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 700, 300, 30));
 
         jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -110,26 +108,32 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, -1, -1));
 
-        jCHabitacionesDisponbiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
-        getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 200, 32));
+        jCHabitacionesDisponbiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCHabitacionesDisponbilesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 432, 460, 40));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 0, 51));
         jLabel8.setText("Cantidad de dias :");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, -1, 33));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, -1, 33));
 
         jTCantidadDias.setBackground(new java.awt.Color(153, 153, 153));
-        getContentPane().add(jTCantidadDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 570, 144, 33));
+        getContentPane().add(jTCantidadDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 583, 150, 40));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel6.setText("Lista Habitaciones Disponibles :");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
 
         jTPrecioTotal.setBackground(new java.awt.Color(153, 153, 153));
-        getContentPane().add(jTPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, 144, 33));
+        getContentPane().add(jTPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 583, 144, 40));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 0, 51));
         jLabel9.setText("Precio Total :");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 630, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 590, -1, -1));
 
         jBLimpiar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBLimpiar.setText("Limpiar");
@@ -138,7 +142,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 jBLimpiarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 810, -1, -1));
+        getContentPane().add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 780, -1, -1));
 
         jbEliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbEliminar.setText("Eliminar");
@@ -147,7 +151,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 770, -1, -1));
+        getContentPane().add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 780, -1, -1));
 
         jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBSalir.setText("Salir");
@@ -156,7 +160,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 jBSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 810, -1, -1));
+        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 780, -1, -1));
 
         jbModificar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jbModificar.setText("Modificar");
@@ -165,13 +169,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 jbModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 770, -1, -1));
-        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 204, 230, 30));
+        getContentPane().add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 780, -1, -1));
+        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 230, 40));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel10.setText("Cantidad de personas: ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
-        getContentPane().add(jTHuesped1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 400, 30));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        getContentPane().add(jTHuesped1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 700, 40));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setText("Datos Huesped :");
@@ -185,6 +189,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         Reserva guardaReserva = new Reserva();
 
         // EXTRAIGO LOS VALORES DE LOS CONTENEDORES DE LA VISTA Y LOS PASO A VARIABLES.
+        
         String canPersonas = jTCantidadPersonas.getText();
         int cantPer = Integer.valueOf(canPersonas);
 
@@ -206,21 +211,26 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         int precioEstadia = (int) difdias * 5000;
         double precioEstadiad = (double) precioEstadia;
         double precioFinal = precioEstadiad;
-        System.out.println(precioEstadia);
-
+//        System.out.println(precioEstadia);
         String precioEstadia2String = String.valueOf(precioEstadia);
-
         jTPrecioTotal.setText(precioEstadia2String);
-
-        //  crear un objeto y pasarlo a la consulta sql.  Respeta el constructot
-        guardaReserva.setHuesped(new Huesped(3));           // id hueped
-        guardaReserva.setHabitacion(new Habitacion(2));     // id habitacion
-        guardaReserva.setFechaInicio(fecha1);               // fehca inicio
-        guardaReserva.setFechaFin(fecha2);                  // fehca salida
-        guardaReserva.setCantPersonas(cantPer);             // cantidad de personas
-        guardaReserva.setPrecioFinal(precioFinal);          //precio total
-        guardaReserva.setCantidadDeDias(cantdias);         // cantidad de dias
-        guardaReserva.setActivo(true);                      // estado 
+        
+        // -----------------------------------------------------------------------
+        
+         Habitacion habit = (Habitacion) jCHabitacionesDisponbiles.getSelectedItem();
+         int idehab = habit.getIdHabitacion();
+        
+        
+        // **************   crear un objeto y pasarlo a la consulta sql.  Respeta el orden del  constructor  ******************
+        
+        guardaReserva.setHuesped(new Huesped(3));               // id hueped
+        guardaReserva.setHabitacion(new Habitacion(idehab));    // id habitacion
+        guardaReserva.setFechaInicio(fecha1);                   // fehca inicio
+        guardaReserva.setFechaFin(fecha2);                      // fehca salida
+        guardaReserva.setCantPersonas(cantPer);                 // cantidad de personas
+        guardaReserva.setPrecioFinal(precioFinal);              //precio total
+        guardaReserva.setCantidadDeDias(cantdias);              // cantidad de dias
+        guardaReserva.setActivo(true);                          // estado 
 
         rd.crearReserva(guardaReserva);
 
@@ -243,6 +253,32 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
 
+        TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
+        int tdh = tipoh.getIdTipoDeHabitacion();
+        System.out.println(tipoh);
+
+        switch (tdh) {
+            case 1:
+                jCHabitacionesDisponbiles.removeAllItems(); // voy limpiando el combo 
+                hd.listarHabitacionesTipo1(); // mediante consulta SQL obtengo el listado de todas las habitaciones de tipo 1 desocupadas . 
+                llenarCBHabitacionesDisponible1();
+                break;
+            case 2:
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo2();
+                llenarCBHabitacionesDisponible2();
+                break;
+            case 3:
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo3();
+                llenarCBHabitacionesDisponible3();
+                break;
+            default:
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo4();
+                llenarCBHabitacionesDisponible4();
+                break;
+        }
 
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
@@ -267,8 +303,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+
       
+
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jCHabitacionesDisponbilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCHabitacionesDisponbilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCHabitacionesDisponbilesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -276,7 +318,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<TipoDeHabitacion> jCBTipoHabitacion;
-    private javax.swing.JComboBox<String> jCHabitacionesDisponbiles;
+    private javax.swing.JComboBox<Habitacion> jCHabitacionesDisponbiles;
     private com.toedter.calendar.JDateChooser jDFechaEntrada;
     private com.toedter.calendar.JDateChooser jDFechaSalida;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -311,16 +353,49 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jDFechaSalida.setDate(null);
         jTCantidadDias.setText("");
         jTPrecioTotal.setText("");
-//       jcbEstado.setSelected(false);
+        jCHabitacionesDisponbiles.removeAllItems();
+//        jCBTipoHabitacion.removeAllItems();
+//        jcbEstado.setSelected(false);
 
     }
-
     private void cargarCBTipoDeHabitaciones() {
 
         TipoDeHabitacionData thd = new TipoDeHabitacionData();
 
         for (TipoDeHabitacion tipodehabitaciones : thd.listarTipoDeHabitaciones()) {
             jCBTipoHabitacion.addItem(tipodehabitaciones);
+        }
+    }
+    private void llenarCBHabitacionesDisponible1() {
+
+        HabitacionData hds1 = new HabitacionData();
+
+        for (Habitacion habitaciones : hds1.listarHabitacionesTipo1()) {
+            jCHabitacionesDisponbiles.addItem(habitaciones);
+        }
+    }
+    private void llenarCBHabitacionesDisponible2() {
+
+        HabitacionData hds2 = new HabitacionData();
+
+        for (Habitacion habitaciones : hds2.listarHabitacionesTipo2()) {
+            jCHabitacionesDisponbiles.addItem(habitaciones);
+        }
+    }
+    private void llenarCBHabitacionesDisponible3() {
+
+        HabitacionData hds3 = new HabitacionData();
+
+        for (Habitacion habitaciones : hds3.listarHabitacionesTipo3()) {
+            jCHabitacionesDisponbiles.addItem(habitaciones);
+        }
+    }
+    private void llenarCBHabitacionesDisponible4() {
+
+        HabitacionData hds4 = new HabitacionData();
+
+        for (Habitacion habitaciones : hds4.listarHabitacionesTipo4()) {
+            jCHabitacionesDisponbiles.addItem(habitaciones);
         }
     }
 

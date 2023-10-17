@@ -43,28 +43,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(479, 479, 479)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(549, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addGap(541, 541, 541))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(316, 316, 316)
+                .addGap(346, 346, 346)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(455, Short.MAX_VALUE))
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 1280, 870));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 1410, 900));
 
         jMenu1.setText("Huesped");
+        jMenu1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
 
+        jMHuesped.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMHuesped.setText("Gestion de Huesped");
         jMHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,14 +78,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Habitaciones");
+        jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
+        jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMenuItem2.setText("Gestion de Habitaciones");
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reservas");
+        jMenu3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMenuItem3.setText("Gestion de Reservas");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

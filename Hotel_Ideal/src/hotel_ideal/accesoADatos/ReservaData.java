@@ -14,10 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author gtorre
- */
+
 public class ReservaData {
 
     Connection con = Conexion.getConexion();
@@ -59,7 +56,6 @@ public class ReservaData {
             JOptionPane.showMessageDialog(null, " No se pudo  generar la reserva. ");
         }
     }
-
 
     public void eliminarReservaPorId(int id) {
         String sql = "DELETE FROM reserva WHERE idReserva = ?";
