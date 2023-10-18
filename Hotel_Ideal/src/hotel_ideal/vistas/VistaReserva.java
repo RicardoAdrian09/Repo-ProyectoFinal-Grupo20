@@ -1,6 +1,7 @@
 package hotel_ideal.vistas;
 
 import hotel_ideal.accesoADatos.HabitacionData;
+import hotel_ideal.accesoADatos.HuespedData;
 import hotel_ideal.accesoADatos.ReservaData;
 import hotel_ideal.accesoADatos.TipoDeHabitacionData;
 import hotel_ideal.entidades.Habitacion;
@@ -19,6 +20,8 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     private HabitacionData hd = new HabitacionData();
     private ReservaData rd = new ReservaData();
+    private HuespedData huespedD = new HuespedData ();
+    
 
     public VistaReserva() {
         initComponents();
@@ -232,6 +235,22 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         Reserva guardaReserva = new Reserva();
 
         // EXTRAIGO LOS VALORES DE LOS CONTENEDORES DE LA VISTA Y LOS PASO A VARIABLES.
+        
+        // -------------------------------------------------------------------------------------------------------------------------------------
+        // campo DNI 
+        
+         String dniH  = jTDni.getText();
+         int dniHu = Integer.valueOf(dniH);
+         
+         
+         Huesped dddd = huespedD.buscarHuespedPorDni(dniHu );
+        
+        
+         
+            
+         
+        
+        
 
         String canPersonas = jTCantidadPersonas.getText();
         int cantPer = Integer.valueOf(canPersonas);
@@ -263,6 +282,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         Habitacion habit = (Habitacion) jCHabitacionesDisponbiles.getSelectedItem();
         int idehab = habit.getIdHabitacion();
 
+        
+        // --------------------------------------------------------------------------------
+       
+        
+        
+        
         // **************   crear un objeto y pasarlo a la consulta sql.  Respeta el orden del  constructor  ******************
 
         guardaReserva.setHuesped(new Huesped(3));               // id hueped

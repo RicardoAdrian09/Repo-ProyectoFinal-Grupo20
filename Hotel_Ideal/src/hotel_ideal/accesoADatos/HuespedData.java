@@ -102,7 +102,7 @@ public class HuespedData {
     public Huesped buscarHuespedPorDni(int dni) {
 
         Huesped huesped = null;
-        String sql = "SELECT idHuesped, nombre, apellido, dni, domicilio, correo, celular, activo FROM dni WHERE ?";
+        String sql = "SELECT idHuesped, nombre, apellido, dni, domicilio, correo, celular, activo FROM huesped  WHERE dni=? ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class HuespedData {
                 huesped.setIdHuesped(rs.getInt("idHuesped"));
                 huesped.setNombre(rs.getString("nombre"));
                 huesped.setApellido(rs.getString("apellido"));
-                huesped.setDni(rs.getInt("dni"));
+                huesped.setDni(rs.getInt(dni));
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getString("celular"));
