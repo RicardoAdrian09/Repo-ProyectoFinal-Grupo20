@@ -108,7 +108,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, -1, -1));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, -1, -1));
 
         jCHabitacionesDisponbiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
         getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 200, 32));
