@@ -24,9 +24,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmHabitaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmReserva = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -43,28 +43,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(479, 479, 479)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(549, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addGap(541, 541, 541))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(316, 316, 316)
+                .addGap(346, 346, 346)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(455, Short.MAX_VALUE))
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 1280, 870));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 1410, 900));
 
         jMenu1.setText("Huesped");
+        jMenu1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
 
+        jMHuesped.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMHuesped.setText("Gestion de Huesped");
         jMHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,21 +78,30 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Habitaciones");
+        jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jMenuItem2.setText("Gestion de Habitaciones");
-        jMenu2.add(jMenuItem2);
+        jmHabitaciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jmHabitaciones.setText("Gestion de Habitaciones");
+        jmHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmHabitacionesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmHabitaciones);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reservas");
+        jMenu3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jMenuItem3.setText("Gestion de Reservas");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmReserva.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jmReserva.setText("Gestion de Reservas");
+        jmReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmReservaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu3.add(jmReserva);
 
         jMenuBar1.add(jMenu3);
 
@@ -100,9 +111,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-        
-        
+        // TODO add your handling code here:   
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMHuespedActionPerformed
@@ -110,26 +119,33 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
         VistaHuesped vi = new VistaHuesped();
-        vi.setVisible(true);  // Muestra pantalla Vista Inscripciones.
+        vi.setVisible(true);  
         escritorio.add(vi);
         escritorio.moveToFront(vi);
     }//GEN-LAST:event_jMHuespedActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservaActionPerformed
         // TODO add your handling code here:
         
         escritorio.removeAll();
         escritorio.repaint();
         VistaReserva vi = new VistaReserva();
-        vi.setVisible(true);  // Muestra pantalla Vista Inscripciones.
+        vi.setVisible(true);  
         escritorio.add(vi);
         escritorio.moveToFront(vi);
         
+    }//GEN-LAST:event_jmReservaActionPerformed
+
+    private void jmHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHabitacionesActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
+        escritorio.repaint();
+        VistaHabitacion vh = new VistaHabitacion();
+        vh.setVisible(true);
+        escritorio.add(vh);
+        escritorio.moveToFront(vh);
         
-        
-        
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmHabitacionesActionPerformed
 
 
 
@@ -143,7 +159,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jmHabitaciones;
+    private javax.swing.JMenuItem jmReserva;
     // End of variables declaration//GEN-END:variables
 }

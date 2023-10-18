@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hotel_ideal.accesoADatos;
 
 import hotel_ideal.entidades.Reserva;
@@ -14,10 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author gtorre
- */
+
 public class ReservaData {
 
     Connection con = Conexion.getConexion();
@@ -40,15 +32,9 @@ public class ReservaData {
             ps.setDate(3, Date.valueOf(reserva.getFechaInicio()));
             ps.setDate(4, Date.valueOf(reserva.getFechaFin()));
             ps.setDouble(5, reserva.getPrecioFinal());
-
             ps.setInt(6, reserva.getCantPersonas());
             ps.setInt(7, reserva.getCantidadDeDias());
             ps.setBoolean(8, true);
-
-//            ps.setInt(6,reserva.);
-//            ps.setInt(7,reserva.);
-            ps.setBoolean(8,true);
-
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -65,7 +51,6 @@ public class ReservaData {
             JOptionPane.showMessageDialog(null, " No se pudo  generar la reserva. ");
         }
     }
-
 
     public void eliminarReservaPorId(int id) {
         String sql = "DELETE FROM reserva WHERE idReserva = ?";
