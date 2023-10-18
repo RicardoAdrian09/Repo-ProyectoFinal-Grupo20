@@ -237,23 +237,27 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         // EXTRAIGO LOS VALORES DE LOS CONTENEDORES DE LA VISTA Y LOS PASO A VARIABLES.
         
         // -------------------------------------------------------------------------------------------------------------------------------------
-        // campo DNI 
+        // campo DNI  - busco Hueped por metodo - lo encuntra y lo muetras en el text field siguiete
         
          String dniH  = jTDni.getText();
          int dniHu = Integer.valueOf(dniH);
          
+          
          
-         Huesped dddd = huespedD.buscarHuespedPorDni(dniHu );
-        
-        
+         Huesped ffff = huespedD.buscarHuespedPorDni(dniHu );  // lo muestro x main 
+         String ddddd= String.valueOf(ffff);
+         System.out.println(ffff);
+         jTHuesped1.setText (ddddd) ;
+             
          
             
-         
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------       
         
         
 
         String canPersonas = jTCantidadPersonas.getText();
         int cantPer = Integer.valueOf(canPersonas);
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
 
         Date fechaInicio = jDFechaEntrada.getDate();
         Date fechaSalida = jDFechaSalida.getDate();
@@ -264,16 +268,21 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
         String difedias = String.valueOf(difdias);
         int cantdias = (int) difdias;
+        
         // Habilito la celdaS y llena el campo de cantidad de dias
+        
         jTCantidadDias.setEnabled(true);
         jTPrecioTotal.setEnabled(true);
         jTCantidadDias.setText(difedias);
 
         // Calculo del precio de la estadia !!
+        
         int precioEstadia = (int) difdias * 5000;
         double precioEstadiad = (double) precioEstadia;
         double precioFinal = precioEstadiad;
-        //        System.out.println(precioEstadia);
+        
+        // System.out.println(precioEstadia);
+        
         String precioEstadia2String = String.valueOf(precioEstadia);
         jTPrecioTotal.setText(precioEstadia2String);
 
@@ -386,6 +395,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void limpiarCampos() {
 
         jTDni.setText("");
+//        jTHuesped1.setText("");
         jtIdReserva.setText("");
         jTCantidadPersonas.setText("");
         jDFechaEntrada.setDate(null);

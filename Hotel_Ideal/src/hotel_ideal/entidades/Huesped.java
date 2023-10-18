@@ -1,16 +1,22 @@
-
 package hotel_ideal.entidades;
 
 public class Huesped {
+
     private int idHuesped;
     private String nombre;
     private String apellido;
-    private int dni; 
+    private int dni;
     private String domicilio;
     private String correo;
     private String celular;
     private boolean activo;
 
+    public Huesped(int idHuesped, String nombre, String apellido, int dni) {
+        this.idHuesped = idHuesped;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+    }
 
     public Huesped(int idHuesped, String nombre, String apellido, int dni, String domicilio, String correo, String celular, boolean activo) {
         this.idHuesped = idHuesped;
@@ -32,9 +38,7 @@ public class Huesped {
         this.celular = celular;
     }
 
-    
-    
-    public Huesped(String nombre,String apellido, int dni, String domicilio, String correo, String celular, boolean activo) {
+    public Huesped(String nombre, String apellido, int dni, String domicilio, String correo, String celular, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -43,15 +47,14 @@ public class Huesped {
         this.celular = celular;
         this.activo = activo;
     }
-    
-        public Huesped() {
+
+    public Huesped() {
     }
 
     public Huesped(int idHuesped) {
         this.idHuesped = idHuesped;
     }
 
-    
     public String getCelular() {
         return celular;
     }
@@ -83,8 +86,6 @@ public class Huesped {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
-    
 
     public int getDni() {
         return dni;
@@ -109,7 +110,7 @@ public class Huesped {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    
+
     public boolean isActivo() {
         return activo;
     }
@@ -120,7 +121,7 @@ public class Huesped {
 
     @Override
     public String toString() {
-        return "Huesped{" + "nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + '}';
+        return  "IdHuesped : " + idHuesped + ", Nombre : " + nombre + ", Apellido : " + apellido + ", DNI . " + dni ;
     }
-    
+
 }

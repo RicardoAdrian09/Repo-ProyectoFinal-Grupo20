@@ -1,4 +1,3 @@
-
 package hotel_ideal.accesoADatos;
 
 import hotel_ideal.entidades.Huesped;
@@ -9,13 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-
 public class HuespedData {
-    
+
     Connection con = Conexion.getConexion();
-    
-    
-    
+
     public void altaHuesped(Huesped huesped) {
         String sql = "INSERT INTO huesped (nombre,apellido,dni,domicilio,correo,"
                 + "celular,activo) VALUES (?,?,?,?,?,?,?)";
@@ -34,7 +30,7 @@ public class HuespedData {
             if (rs.next()) {
                 huesped.setIdHuesped(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Huesped: "+huesped.getNombre()+". añadido con exito");
+                JOptionPane.showMessageDialog(null, "Huesped: " + huesped.getNombre() + ". añadido con exito");
 
             }
 
@@ -45,7 +41,7 @@ public class HuespedData {
         }
 
     }
-    
+
     public void eliminarHuesped(int dni) {
 
         try {
@@ -61,13 +57,13 @@ public class HuespedData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de huesped"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de huesped" + ex.getMessage());
         }
 
     }
-    
+
     public void modificarHuesped(Huesped huesped) {
-        
+
         String sql = "UPDATE huesped  SET nombre=?, apellido=?, dni=?, domicilio=?,"
                 + "correo=?,celular=?,activo=?  WHERE idHuesped = ?";
         try {
@@ -81,7 +77,6 @@ public class HuespedData {
             ps.setString(6, huesped.getCelular());
             ps.setBoolean(7, huesped.isActivo());
             ps.setInt(8, huesped.getIdHuesped());
-            
 
             int exito = ps.executeUpdate();
 
@@ -93,12 +88,12 @@ public class HuespedData {
 
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Huesped"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Huesped" + ex.getMessage());
 
         }
-    
+
     }
-    
+
     public Huesped buscarHuespedPorDni(int dni) {
 
         Huesped huesped = null;
@@ -113,7 +108,7 @@ public class HuespedData {
                 huesped.setIdHuesped(rs.getInt("idHuesped"));
                 huesped.setNombre(rs.getString("nombre"));
                 huesped.setApellido(rs.getString("apellido"));
-                huesped.setDni(rs.getInt(dni));
+                huesped.setDni(rs.getInt("dni"));
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getString("celular"));
@@ -127,10 +122,10 @@ public class HuespedData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped"+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped" + ex.getMessage());
         }
 
         return huesped;
     }
-    
+
 }
