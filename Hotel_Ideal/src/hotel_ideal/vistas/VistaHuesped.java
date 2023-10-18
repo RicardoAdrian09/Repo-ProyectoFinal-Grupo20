@@ -51,6 +51,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jBModificar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBBuscar = new javax.swing.JButton();
+        jBLimpiar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Gestion de Huesped");
@@ -104,6 +105,13 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             }
         });
 
+        jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,15 +143,21 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                         .addComponent(jBBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBAlta)
-                    .addComponent(jRBEstado))
-                .addGap(32, 32, 32)
-                .addComponent(jBModificar)
-                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jRBEstado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBLimpiar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBAlta)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBModificar)
+                        .addGap(18, 18, 18)))
                 .addComponent(jBEliminar)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +195,8 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBAlta)
                     .addComponent(jBModificar)
-                    .addComponent(jBEliminar))
+                    .addComponent(jBEliminar)
+                    .addComponent(jBLimpiar))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -236,33 +251,47 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
-        int dni = Integer.parseInt(jTDni.getText());
-        String nombre = jTNombre.getText();
-        String apellido = jTApellido.getText();
-        String domicilio = jTDomicilio.getText();
-        String correo = jTCorreo.getText();
-        String celular = jTCelular.getText();
-        boolean activo = jRBEstado.isSelected();
-        
-        Huesped h = new Huesped(nombre,apellido,dni,domicilio,correo,celular,activo);
-        HuespedData hd = new HuespedData();
-        hd.modificarHuesped(h);
+        try{
+            if(actual != null){
+                actual.setDni(Integer.parseInt(jTDni.getText()));
+                actual.setApellido(jTApellido.getText());
+                actual.setNombre(jTNombre.getText());
+                actual.setDomicilio(jTDomicilio.getText());
+                actual.setCorreo(jTCorreo.getText());
+                actual.setCelular(jTCelular.getText());
+                actual.setActivo(jRBEstado.isSelected());
+                hd.modificarHuesped(actual);
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Ingrese un numero valido");
+        }
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
-        int dni = Integer.parseInt(jTDni.getText()); 
-        HuespedData hd = new HuespedData();
-        Huesped h = hd.buscarHuespedPorDni(dni);
-        
-        jTNombre.setText(h.getNombre());
-        jTApellido.setText(h.getApellido());
-        jTDomicilio.setText(h.getDomicilio());
-        jTCorreo.setText(h.getCorreo());
-        jTCelular.setText(h.getCelular());
-        jRBEstado.setSelected(h.isActivo());
+        try{
+        int dni = Integer.parseInt(jTDni.getText());
+       
+        actual = hd.buscarHuespedPorDni(dni);
+
+        jTNombre.setText(actual.getNombre());
+        jTApellido.setText(actual.getApellido());
+        jTDomicilio.setText(actual.getDomicilio());
+        jTCorreo.setText(actual.getCorreo());
+        jTCelular.setText(actual.getCelular());
+        jRBEstado.setSelected(actual.isActivo());
+        }catch(NumberFormatException y){
+            JOptionPane.showMessageDialog(null, "Ingrese un numero valido");
+   
+        }
         
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarCampos();
+        actual = null;
+    }//GEN-LAST:event_jBLimpiarActionPerformed
     public void limpiarCampos(){
         jTNombre.setText("");
         jTApellido.setText("");
@@ -277,6 +306,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBAlta;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
