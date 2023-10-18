@@ -35,11 +35,11 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTNombre = new javax.swing.JTextField();
+        jTDni = new javax.swing.JTextField();
         jTApellido = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTDni = new javax.swing.JTextField();
+        jTNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTDomicilio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -133,9 +133,9 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                         .addGap(137, 137, 137))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(jTDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                             .addComponent(jTApellido, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTDni, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTDomicilio, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTCelular, javax.swing.GroupLayout.Alignment.LEADING))
@@ -166,7 +166,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
@@ -175,7 +175,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -272,18 +272,19 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         try{
         int dni = Integer.parseInt(jTDni.getText());
        
-        actual = hd.buscarHuespedPorDni(dni);
-
+            actual = hd.buscarHuespedPorDni(dni);
+            
+        }catch(NumberFormatException y){
+            JOptionPane.showMessageDialog(null, "Ingrese un numero valido");
+   
+        }
         jTNombre.setText(actual.getNombre());
         jTApellido.setText(actual.getApellido());
         jTDomicilio.setText(actual.getDomicilio());
         jTCorreo.setText(actual.getCorreo());
         jTCelular.setText(actual.getCelular());
         jRBEstado.setSelected(actual.isActivo());
-        }catch(NumberFormatException y){
-            JOptionPane.showMessageDialog(null, "Ingrese un numero valido");
-   
-        }
+        
         
     }//GEN-LAST:event_jBBuscarActionPerformed
 
@@ -293,7 +294,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         actual = null;
     }//GEN-LAST:event_jBLimpiarActionPerformed
     public void limpiarCampos(){
-        jTNombre.setText("");
+        jTDni.setText("");
         jTApellido.setText("");
         jTDomicilio.setText("");
         jTCorreo.setText("");
