@@ -59,6 +59,12 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nombre:");
 
+        jTDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTDniActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Apellido:");
 
         jLabel4.setText("DNI:");
@@ -297,7 +303,7 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
             
             
         }catch(NumberFormatException y){
-            JOptionPane.showMessageDialog(null, "Ingrese un numero valido");
+            JOptionPane.showMessageDialog(null, "Ingrese un numero valido" + y.getMessage());
    
         }
         
@@ -315,9 +321,14 @@ public class VistaHuesped extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         doDefaultCloseAction();
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jTDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTDniActionPerformed
     public void limpiarCampos(){
         jTDni.setText("");
         jTApellido.setText("");
+        jTNombre.setText("");
         jTDomicilio.setText("");
         jTCorreo.setText("");
         jTCelular.setText("");
