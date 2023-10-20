@@ -117,7 +117,7 @@ public class HuespedData {
             } else {
 
                 JOptionPane.showMessageDialog(null, "El huesped no existe");
-
+                
             }
             ps.close();
 

@@ -20,8 +20,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
     private HabitacionData hd = new HabitacionData();
     private ReservaData rd = new ReservaData();
-    private HuespedData huespedD = new HuespedData ();
-    
+    private HuespedData huespedD = new HuespedData();
 
     public VistaReserva() {
         initComponents();
@@ -171,6 +170,12 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jbModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 780, -1, -1));
+
+        jTCantidadPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCantidadPersonasActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 230, 40));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -200,6 +205,9 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    int variableGlobal;
+
+
     private void jCBTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoHabitacionActionPerformed
 
         TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
@@ -208,25 +216,25 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         switch (tdh) {
             case 1:
-            jCHabitacionesDisponbiles.removeAllItems(); // voy limpiando el combo
-            hd.listarHabitacionesTipo1(); // mediante consulta SQL obtengo el listado de todas las habitaciones de tipo 1 desocupadas .
-            llenarCBHabitacionesDisponible1();
-            break;
+                jCHabitacionesDisponbiles.removeAllItems(); // voy limpiando el combo
+                hd.listarHabitacionesTipo1(); // mediante consulta SQL obtengo el listado de todas las habitaciones de tipo 1 desocupadas .
+                llenarCBHabitacionesDisponible1();
+                break;
             case 2:
-            jCHabitacionesDisponbiles.removeAllItems();
-            hd.listarHabitacionesTipo2();
-            llenarCBHabitacionesDisponible2();
-            break;
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo2();
+                llenarCBHabitacionesDisponible2();
+                break;
             case 3:
-            jCHabitacionesDisponbiles.removeAllItems();
-            hd.listarHabitacionesTipo3();
-            llenarCBHabitacionesDisponible3();
-            break;
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo3();
+                llenarCBHabitacionesDisponible3();
+                break;
             default:
-            jCHabitacionesDisponbiles.removeAllItems();
-            hd.listarHabitacionesTipo4();
-            llenarCBHabitacionesDisponible4();
-            break;
+                jCHabitacionesDisponbiles.removeAllItems();
+                hd.listarHabitacionesTipo4();
+                llenarCBHabitacionesDisponible4();
+                break;
         }
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
 
@@ -234,31 +242,21 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         Reserva guardaReserva = new Reserva();
 
-        // EXTRAIGO LOS VALORES DE LOS CONTENEDORES DE LA VISTA Y LOS PASO A VARIABLES.
-        
-        // -------------------------------------------------------------------------------------------------------------------------------------
-        // campo DNI  - busco Hueped por metodo - lo encuntra y lo muetras en el text field siguiete
-        
-         String dniH  = jTDni.getText();
-         int dniHu = Integer.valueOf(dniH);
-         
-          
-         
-         Huesped ffff = huespedD.buscarHuespedPorDni(dniHu );  // lo muestro x main 
-         String ddddd= String.valueOf(ffff);
-         System.out.println(ffff);
-         jTHuesped1.setText (ddddd) ;
-             
-         
-            
-  //-----------------------------------------------------------------------------------------------------------------------------------------------------       
-        
-        
-
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------       
+        //  Control de cantidad de personas Vs. Capacidad de la habitacion
         String canPersonas = jTCantidadPersonas.getText();
-        int cantPer = Integer.valueOf(canPersonas);
-// -------------------------------------------------------------------------------------------------------------------------------------------------------
+        int cantPer = Integer.valueOf(canPersonas); // ok 
 
+        TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
+        int tdh = tipoh.getIdTipoDeHabitacion();  // ok
+        int cdc = tipoh.getCantPersonas();        // ok 
+
+//       int capacidad = cantPer - cdc ;
+//       if ( capacidad > 0) {
+//           System.out.println("La cantidad de personas exede la capacidad de la habitacion ");
+//       }
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+        //  Control de fechas de ingreso y egreso
         Date fechaInicio = jDFechaEntrada.getDate();
         Date fechaSalida = jDFechaSalida.getDate();
 
@@ -268,38 +266,28 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
         String difedias = String.valueOf(difdias);
         int cantdias = (int) difdias;
-        
-        // Habilito la celdaS y llena el campo de cantidad de dias
-        
+
+        // Habilito la celdasy llena el campo de cantidad de dias.
         jTCantidadDias.setEnabled(true);
         jTPrecioTotal.setEnabled(true);
         jTCantidadDias.setText(difedias);
 
         // Calculo del precio de la estadia !!
-        
         int precioEstadia = (int) difdias * 5000;
         double precioEstadiad = (double) precioEstadia;
         double precioFinal = precioEstadiad;
-        
-        // System.out.println(precioEstadia);
-        
+
         String precioEstadia2String = String.valueOf(precioEstadia);
         jTPrecioTotal.setText(precioEstadia2String);
-
-        // -----------------------------------------------------------------------
+        // --------------------------------------------------------------------------------------------------------------------------------------------------
+        // Lista de Habitaciones Disponibles
 
         Habitacion habit = (Habitacion) jCHabitacionesDisponbiles.getSelectedItem();
         int idehab = habit.getIdHabitacion();
 
-        
-        // --------------------------------------------------------------------------------
-       
-        
-        
-        
+// ----------------------------------------------------------------------------------------------------------------------------------------------------
         // **************   crear un objeto y pasarlo a la consulta sql.  Respeta el orden del  constructor  ******************
-
-        guardaReserva.setHuesped(new Huesped(3));               // id hueped
+        guardaReserva.setHuesped(new Huesped(variableGlobal));               // id hueped
         guardaReserva.setHabitacion(new Habitacion(idehab));    // id habitacion
         guardaReserva.setFechaInicio(fecha1);                   // fehca inicio
         guardaReserva.setFechaFin(fecha2);                      // fehca salida
@@ -357,8 +345,56 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jTDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDniActionPerformed
-        // TODO add your handling code here:
+
+        // campo DNI  - busco Hueped por metodo - lo encuntra y lo muetras en el text field siguiete
+        // ontengo el dni ingresado por el ususario en la vista
+        try {
+
+            String dniH = jTDni.getText();
+            int dniHu = Integer.valueOf(dniH);
+
+            // paso el int como argumento para buscar el hueped
+            // asigno al text field  "datos huesped " el objeto Huesped para mostrar los datos.
+            Huesped ffff = huespedD.buscarHuespedPorDni(dniHu);  // lo muestro x main 
+            System.out.println(ffff);
+            String ddddd = String.valueOf(ffff);
+                int gggg = Integer.valueOf(ddddd);
+
+//             variableGlobal=gggg;
+            if (ffff == null) {
+                System.out.println("en nulo");
+                jTHuesped1.setText("");
+            } else {
+                System.out.println(" no es nulo");
+
+                jTHuesped1.setText(ddddd);
+            }
+        } catch (NumberFormatException ex) {
+                jTHuesped1.setText("");
+            JOptionPane.showMessageDialog(null, " Por favor , ingrese caracteres Numericos  ");
+        }
+
     }//GEN-LAST:event_jTDniActionPerformed
+
+    private void jTCantidadPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCantidadPersonasActionPerformed
+        // TODO add your handling code here:
+        // este
+
+//        String canPersonas = jTCantidadPersonas.getText();
+//         int cantPer = Integer.valueOf(canPersonas); // ok 
+//        
+//        
+//        
+//        TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
+//        int tdh = tipoh.getIdTipoDeHabitacion();  // ok
+//        int cdc = tipoh.getCantPersonas();        // ok 
+//        
+//        int capacidad = cantPer - cdc ;
+//        if ( capacidad > 0) {
+//           System.out.println("La cantidad de personas exede la capacidad de la habitacion ");
+//       } 
+
+    }//GEN-LAST:event_jTCantidadPersonasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -395,7 +431,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void limpiarCampos() {
 
         jTDni.setText("");
-//        jTHuesped1.setText("");
+        jTHuesped1.setText("");
         jtIdReserva.setText("");
         jTCantidadPersonas.setText("");
         jDFechaEntrada.setDate(null);
@@ -407,6 +443,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 //        jcbEstado.setSelected(false);
 
     }
+
     private void cargarCBTipoDeHabitaciones() {
 
         TipoDeHabitacionData thd = new TipoDeHabitacionData();
@@ -415,6 +452,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             jCBTipoHabitacion.addItem(tipodehabitaciones);
         }
     }
+
     private void llenarCBHabitacionesDisponible1() {
 
         HabitacionData hds1 = new HabitacionData();
@@ -423,6 +461,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             jCHabitacionesDisponbiles.addItem(habitaciones);
         }
     }
+
     private void llenarCBHabitacionesDisponible2() {
 
         HabitacionData hds2 = new HabitacionData();
@@ -431,6 +470,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             jCHabitacionesDisponbiles.addItem(habitaciones);
         }
     }
+
     private void llenarCBHabitacionesDisponible3() {
 
         HabitacionData hds3 = new HabitacionData();
@@ -439,6 +479,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             jCHabitacionesDisponbiles.addItem(habitaciones);
         }
     }
+
     private void llenarCBHabitacionesDisponible4() {
 
         HabitacionData hds4 = new HabitacionData();
