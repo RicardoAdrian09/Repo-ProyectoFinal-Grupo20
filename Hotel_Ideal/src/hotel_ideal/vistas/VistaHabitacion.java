@@ -1,4 +1,3 @@
-
 package hotel_ideal.vistas;
 
 import hotel_ideal.accesoADatos.HabitacionData;
@@ -8,17 +7,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class VistaHabitacion extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo=new DefaultTableModel();
-    private DefaultTableModel modelo2=new DefaultTableModel();
-    /**
-     * Creates new form VistaHabitacion
-     */
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo2 = new DefaultTableModel();
+
     public VistaHabitacion() {
         initComponents();
         armarCabeceraDesocupadas();
         armarCabeceraOcupadas();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -185,27 +181,27 @@ public class VistaHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbTipoDeHabitacionActionPerformed
 
     private void jbCargarTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarTablasActionPerformed
-        // TODO add your handling code here:
+        modelo.setRowCount(0);
+        modelo2.setRowCount(0);
         cargarTablas();
     }//GEN-LAST:event_jbCargarTablasActionPerformed
 
-public void cargarTablas() {
-         HabitacionData hd = new HabitacionData();
-            List<Habitacion>hab = hd.obtenerHabitaciones();
-            for (Habitacion arg : hab) {
-                if (arg.isEstado()==false) {
-                    modelo.addRow(new Object[]{
-                arg.getIdHabitacion(),arg.getIdTipoDeHab(),arg.getPiso()
+    public void cargarTablas() {
+        HabitacionData hd = new HabitacionData();
+        List<Habitacion> hab = hd.obtenerHabitaciones();
+        for (Habitacion arg : hab) {
+            if (arg.isEstado() == true) {
+                modelo.addRow(new Object[]{
+                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
                 });
-                }else{
-                    modelo2.addRow(new Object[]{
-                arg.getIdHabitacion(),arg.getIdTipoDeHab(),arg.getPiso()
+            } else {
+                modelo2.addRow(new Object[]{
+                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
                 });
-                }
-                
+            }
         }
-
-    }
+        
+    }   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -221,17 +217,17 @@ public void cargarTablas() {
     private javax.swing.JTable jtOcupadas;
     private javax.swing.JTextField jtPiso;
     // End of variables declaration//GEN-END:variables
-private void armarCabeceraOcupadas(){
-    modelo.addColumn("N° Habitacion");
-    modelo.addColumn("Tipo Habitacion");
-    modelo.addColumn("Piso");
-    jtOcupadas.setModel(modelo);
-}
-private void armarCabeceraDesocupadas(){
-    modelo2.addColumn("N° Habitacion");
-    modelo2.addColumn("Tipo Habitacion");
-    modelo2.addColumn("Piso");
-    jtDesocupadas.setModel(modelo2);
-}
+private void armarCabeceraOcupadas() {
+        modelo.addColumn("N° Habitacion");
+        modelo.addColumn("Tipo Habitacion");
+        modelo.addColumn("Piso");
+        jtOcupadas.setModel(modelo);
+    }
+    private void armarCabeceraDesocupadas() {
+        modelo2.addColumn("N° Habitacion");
+        modelo2.addColumn("Tipo Habitacion");
+        modelo2.addColumn("Piso");
+        jtDesocupadas.setModel(modelo2);
+    }
 
 }
