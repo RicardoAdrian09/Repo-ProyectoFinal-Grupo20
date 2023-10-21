@@ -23,7 +23,6 @@ public class TipoDeHabitacionData {
 
     public TipoDeHabitacionData() {
     }
-    
      public List<TipoDeHabitacion> listarTipoDeHabitaciones() {
         String sql = "SELECT idTipoDeHabitacion, tipo, cantidadDePersonas, cantCamas, tipoDeCamas, precioPorNoche FROM tipodehabitacion";
         List<TipoDeHabitacion> tipoDeHabitaciones = new ArrayList<>();
@@ -36,7 +35,8 @@ public class TipoDeHabitacionData {
                 tipoDeHabitacion.setIdTipoDeHabitacion(rs.getInt("idTipoDeHabitacion"));
                 tipoDeHabitacion.setTipo(rs.getString("tipo"));
                 tipoDeHabitacion.setCantPersonas(rs.getInt("cantidadDePersonas"));
-                tipoDeHabitacion.setTipoDeCama(rs.getNString("tipoDeCamas"));
+                tipoDeHabitacion.setCantCamas(rs.getInt("cantCamas"));
+                tipoDeHabitacion.setTipoDeCama("tipoDeCamas");
                 tipoDeHabitacion.setPrecioPorNoche(rs.getInt("precioPorNoche"));
 
                 tipoDeHabitaciones.add(tipoDeHabitacion);
