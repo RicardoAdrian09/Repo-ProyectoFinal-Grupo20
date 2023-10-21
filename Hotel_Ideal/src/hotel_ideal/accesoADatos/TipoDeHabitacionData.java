@@ -48,9 +48,27 @@ public class TipoDeHabitacionData {
         return tipoDeHabitaciones;
     }
 
-  
+       public List<TipoDeHabitacion> listarTipoDeHabitacionesComboBox() {
+        String sql = "SELECT idTipoDeHabitacion, tipo FROM tipodehabitacion";
+        List<TipoDeHabitacion> tipoDeHabitaciones = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                TipoDeHabitacion tipoDeHabitacion = new TipoDeHabitacion();
+                tipoDeHabitacion.setIdTipoDeHabitacion(rs.getInt("idTipoDeHabitacion"));
+                tipoDeHabitacion.setTipo(rs.getString("tipo"));
+
+                tipoDeHabitaciones.add(tipoDeHabitacion);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista de tipo de habitaciones");
+        }
+        return tipoDeHabitaciones;
+    }
  
      
      
-
 }

@@ -30,6 +30,11 @@ public class TipoDeHabitacion {
         this.idTipoDeHabitacion = idTipoDeHabitacion;
     }
 
+    public TipoDeHabitacion(int idTipoDeHabitacion, String tipo) {
+        this.idTipoDeHabitacion = idTipoDeHabitacion;
+        this.tipo = tipo;
+    }
+    
     public TipoDeHabitacion() {
     }
 
