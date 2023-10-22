@@ -128,4 +128,31 @@ public class HuespedData {
         return huesped;
     }
 
+    
+    public Huesped buscarHuespedPorId(int idHuesped) {
+    Huesped huesped = null;
+    String sql = "SELECT * FROM huesped WHERE idHuesped = ?";
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idHuesped);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            huesped = new Huesped();
+            huesped.setIdHuesped(rs.getInt("idHuesped"));
+            // Asigna otros atributos del huésped desde el resultado
+        }
+        
+        ps.close();
+    } catch (SQLException ex) {
+       JOptionPane.showMessageDialog(null, "No se encontro el ID del huesped ");
+    }
+    
+    return huesped;
+}
+
+
+
+
 }

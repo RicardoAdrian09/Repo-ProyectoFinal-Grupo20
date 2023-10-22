@@ -1,6 +1,7 @@
 package hotel_ideal.accesoADatos;
 
 import hotel_ideal.entidades.Habitacion;
+import hotel_ideal.entidades.Huesped;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -254,5 +255,29 @@ public class HabitacionData {
         
         return habitaciones;
     }
+  
+    public Habitacion buscarHabitacionPorId(int idHabitacion) {
+    Habitacion habitacion  = null;
+    String sql = "SELECT * FROM habitacion WHERE idHabitacion = ?";
     
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idHabitacion);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            
+             habitacion = new Habitacion ();
+            
+            habitacion.setIdHabitacion(rs.getInt("idHabitacion"));
+            // Asigna otros atributos del huésped desde el resultado
+        }
+        
+        ps.close();
+    } catch (SQLException ex) {
+       JOptionPane.showMessageDialog(null, "No se encontro el ID de la habitacion  ");
+    }
+    
+    return habitacion;
+}
 }
