@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestionReservasView extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
-    
+    int filaSeleccionada ; 
  
     public GestionReservasView() {
         initComponents();
@@ -95,6 +95,11 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         jTReserva.setFocusable(false);
         jTReserva.getTableHeader().setResizingAllowed(false);
         jTReserva.getTableHeader().setReorderingAllowed(false);
+        jTReserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTReservaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTReserva);
 
         jBEliminarReservas.setText("Cancelar Reserva");
@@ -230,6 +235,39 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
 //        doDefaultCloseAction();
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jTReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReservaMouseClicked
+      
+        
+      filaSeleccionada  = jTReserva.getSelectedRow();
+    
+    
+     if (filaSeleccionada >= 0) {
+       
+       
+        String fechaInicio = modelo.getValueAt(filaSeleccionada, 3).toString(); 
+        System.out.println( " fecha inicio :" + fechaInicio);
+        String fechaSalida = modelo.getValueAt(filaSeleccionada, 4).toString();
+         System.out.println(" fecha salida :"+ fechaSalida);
+        // Establece las fechas en los campos de texto
+//        jTextFieldFechaInicio.setText(fechaInicio);
+//        jTextFieldFechaSalida.setText(fechaSalida);
+   
+        System.out.println(" fila selec:"+ filaSeleccionada);
+       
+        
+
+        jTReserva.repaint();
+}
+
+
+
+
+
+
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_jTReservaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
