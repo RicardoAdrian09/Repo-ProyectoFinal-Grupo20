@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -69,6 +70,38 @@ public class TipoDeHabitacionData {
         return tipoDeHabitaciones;
     }
  
+     public TipoDeHabitacion buscarxTipoDeHabitacion(String tipo){
+        TipoDeHabitacion tipoDeHabitacion = null;
+        try {
+            
+            String sql = "SELECT * FROM tipodehabitacion WHERE tipo = ? ;";
+
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, tipo);
+           
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                tipoDeHabitacion = new TipoDeHabitacion();
+                tipoDeHabitacion.setIdTipoDeHabitacion(resultSet.getInt("idTipodeHabitacion"));
+                tipoDeHabitacion.setTipo(resultSet.getString("tipo"));
+                tipoDeHabitacion.setCantPersonas(resultSet.getInt("cantidadDePersonas"));
+                tipoDeHabitacion.setCantCamas(resultSet.getInt("cantCamas"));
+                tipoDeHabitacion.setTipoDeCama(resultSet.getString("tipoCamas"));
+                tipoDeHabitacion.setPrecioPorNoche(resultSet.getInt("precioPorNoche"));
+
+                
+            }      
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar un Tipo De Habitacion: " + ex.getMessage());
+        }
+        
+        return tipoDeHabitacion;
+    }
+     
      
      
 }

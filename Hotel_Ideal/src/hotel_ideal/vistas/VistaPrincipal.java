@@ -150,7 +150,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
          escritorio.removeAll();
         escritorio.repaint();
-        VistaHabitacion vh = new VistaHabitacion();
+        VistaHabitaciones vh = new VistaHabitaciones();
         vh.setVisible(true);
         escritorio.add(vh);
         escritorio.moveToFront(vh);
