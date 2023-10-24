@@ -5,6 +5,8 @@
  */
 package hotel_ideal.vistas;
 
+import hotel_ideal.accesoADatos.HabitacionData;
+import hotel_ideal.entidades.Habitacion;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,7 +44,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
         Modificar = new javax.swing.JButton();
         jBborrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtId = new javax.swing.JTextField();
         BtBuscar = new javax.swing.JButton();
         BtLimpiar = new javax.swing.JButton();
 
@@ -102,7 +104,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Id Habitacion");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtId.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         BtBuscar.setText("Buscar");
         BtBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +147,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
                             .addComponent(jtPiso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(BtBuscar))
                                 .addComponent(jcbTipoDeHabitacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -165,7 +167,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -262,32 +264,19 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBborrarActionPerformed
 
     private void BtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBuscarActionPerformed
-//        try {
-            // TODO add your handling code here:
-//            int id=Integer.parseInt(JtId.getText());
-//            Habitacion habitacion = habitacionData.buscarHabitacion(id);
-//            if (habitacion!=null) {
-//                JtId.setText(habitacion.getId_habitacion()+"");
-//                JtNumero.setText(habitacion.getNumero()+"");
-//                JtPiso.setText(habitacion.getPiso()+"");
-//                //jcOcupado.setText(habitacion.getEstado()+"");
-//                if(habitacion.isEstado()){
-//                    jcOcupado.setSelected(true);
-//
-//                }
-//                cbTipo.setSelectedItem(habitacion.getTipo_de_habitacion().getTipo());
-//
-//                // TipoDeHabitacion tipo_de_habitacion = tipoDeHabitacionData.buscarxTipoDeHabitacion(tipo);
-//
-//                // cbTipo.setSelectedItem(tipo_de_habitacion);
-//
-//                //JtTipo.setText(habitacion.getTipo_de_habitacion().getTipo());
-//            }else{
-//                JOptionPane.showMessageDialog(this, "La habitacion no se encuentra cargada\n Complete los campos para agregar una nueva");
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(VistaHabitacion.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+             if (!jtId.getText().isEmpty()) {
+            
+            int id = Integer.parseInt(jtId.getText());
+            System.out.println(id + "");
+            Habitacion habitacion = new HabitacionData().buscarHabitacionPorId(id);
+            if (habitacion != null) {
+                jcbTipoDeHabitacion.setSelectedItem(habitacion.getIdTipoDeHab());
+                jtPiso.setText(habitacion.getPiso() + "");
+                jrbOcupada.setSelected(habitacion.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro el ID");
+            }
+        }
     }//GEN-LAST:event_BtBuscarActionPerformed
 
     private void BtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLimpiarActionPerformed
@@ -312,10 +301,10 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JComboBox<String> jcbTipoDeHabitacion;
     private javax.swing.JRadioButton jrbOcupada;
+    private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtPiso;
     // End of variables declaration//GEN-END:variables
 }
