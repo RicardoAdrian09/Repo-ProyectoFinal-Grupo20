@@ -14,9 +14,8 @@ import java.time.Month;
 public class Hotel_Ideal {
 
     public static void main(String[] args) {
-        
+
 // puebas desde el Main       
-        
 //        pruebas de metodos HuespedData 
 //        Huesped huesped = new Huesped();
 //        huespedData.altaHuesped(huesped);
@@ -33,27 +32,12 @@ public class Hotel_Ideal {
 //        Reserva reserva = new Reserva ( new Huesped(3),new Habitacion(2),LocalDate.of(2023,10,11),LocalDate.of(2023, 10,18),2500,true);
 //        Reserva reserva = new Reserva(LocalDate.of(2023, 10, 11), LocalDate.of(2023, 10, 26), 4000, true, 25);
 //        ReservaData rd = new ReservaData(); //rd.crearReserva(reserva);
- //       rd.eliminarReservaPorId(24);
+        //       rd.eliminarReservaPorId(24);
 //        rd.modificarReservaPorId(reserva);
-   
-    
+        VistaPrincipal panta = new VistaPrincipal();
+        panta.setVisible(true);
+        panta.setLocationRelativeTo(null);
 
-
-
-            VistaPrincipal panta = new VistaPrincipal();
-            panta.setVisible (true);
-            panta.setLocationRelativeTo( null);
-            
-            
-            
-    
-    
-    
-    
-    
-    
-    
-    
     }
 
 }
