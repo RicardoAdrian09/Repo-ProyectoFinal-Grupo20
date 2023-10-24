@@ -56,6 +56,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jTPrecioTotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jBSalir = new javax.swing.JButton();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setTitle("Reservas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -196,6 +197,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, -1, -1));
+        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -360,6 +362,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jDFechaEntrada;
     private com.toedter.calendar.JDateChooser jDFechaSalida;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLHuesped;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
