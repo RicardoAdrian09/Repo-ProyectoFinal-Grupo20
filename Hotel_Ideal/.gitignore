@@ -37,7 +37,7 @@ replay_pid*
 nbproject/project.properties
 
 # Ignorar archivo de Conexion.java
-src/UniversidadGrupo22/accesoADatos/Conexion.java
+src/Repo-ProyectoFinal-Grupo20/accesoADatos/Conexion.java
 
 # Ignora archivos jar compilados localmente
 *.jar
