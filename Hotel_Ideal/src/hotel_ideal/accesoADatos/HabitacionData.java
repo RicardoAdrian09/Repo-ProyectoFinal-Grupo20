@@ -254,24 +254,24 @@ public class HabitacionData {
         return habitaciones;
     }
 
-    public Habitacion buscarHabitacionPorId(int idHabitacion) {
+    public Habitacion buscarHabitacionPorId(int idHabi) {
         Habitacion habi = null;
         PreparedStatement ps = null;
-        System.out.println(idHabitacion);
+        System.out.println(idHabi);
         try {
             String sql = "SELECT * FROM habitacion WHERE idHabitacion = ?";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idHabitacion);
+            ps.setInt(1, idHabi);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 habi = new Habitacion();
                 
                 habi.setIdHabitacion(rs.getInt("idHabitacion"));
-                habi.setIdTipoDeHab(rs.getInt("idIdTipoDeHabitacion"));
+                habi.setIdTipoDeHab(rs.getInt("idTipoDeHabitacion"));
                 habi.setPiso(rs.getInt("piso"));
                 habi.setEstado(rs.getBoolean("estado"));
                 
-                System.out.println(habi.getIdHabitacion() + " - " + habi.getPiso());
+                System.out.println(rs.getInt("idHabitacion") + " - " + rs.getInt("piso"));
             }
 
             ps.close();

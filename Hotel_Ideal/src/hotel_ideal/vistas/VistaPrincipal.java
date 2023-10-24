@@ -5,15 +5,17 @@
  */
 package hotel_ideal.vistas;
 
+import java.awt.Dimension;
+
 public class VistaPrincipal extends javax.swing.JFrame {
-    
- 
+
     public VistaPrincipal() {
         initComponents();
-              
+        //Centro la ventana a la pantalla
+        this.setLocationRelativeTo(this);
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -139,37 +141,36 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
         VistaHuesped vi = new VistaHuesped();
-        vi.setVisible(true);  
+        vi.setVisible(true);
         escritorio.add(vi);
         escritorio.moveToFront(vi);
     }//GEN-LAST:event_jMHuespedActionPerformed
 
     private void jmReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservaActionPerformed
         // TODO add your handling code here:
-        
+
         escritorio.removeAll();
         escritorio.repaint();
         VistaReserva vi = new VistaReserva();
-        vi.setVisible(true);  
+        vi.setVisible(true);
         escritorio.add(vi);
         escritorio.moveToFront(vi);
-        
+
     }//GEN-LAST:event_jmReservaActionPerformed
 
     private void jmHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHabitacionesActionPerformed
         // TODO add your handling code here:
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         VistaHabitaciones vh = new VistaHabitaciones();
         vh.setVisible(true);
         escritorio.add(vh);
         escritorio.moveToFront(vh);
-        
+
     }//GEN-LAST:event_jmHabitacionesActionPerformed
 
     private void jMGestionReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionReservasActionPerformed
-       
-        
+
         escritorio.removeAll();
         escritorio.repaint();
         GestionReservasView gr = new GestionReservasView();
@@ -180,18 +181,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMGestionReservasActionPerformed
 
     private void jMGestionHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionHabitacionesActionPerformed
-        
+
         escritorio.removeAll();
         escritorio.repaint();
         VistaGestionHabitacion vh = new VistaGestionHabitacion();
         vh.setVisible(true);
         escritorio.add(vh);
+        // Para centrar el JInternalFrame en el escritorio ---------------------
+        Dimension escritorioSize = escritorio.getSize();
+        Dimension FrameSize = vh.getSize();
+        vh.setLocation(
+                (escritorioSize.width - FrameSize.width) / 2,
+                (escritorioSize.height - FrameSize.height) / 2
+        );
+        // ---------------------------------------------------------------------
         escritorio.moveToFront(vh);
-        
+
     }//GEN-LAST:event_jMGestionHabitacionesActionPerformed
-
-
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
