@@ -270,12 +270,13 @@ public class HabitacionData {
                 habi.setIdTipoDeHab(rs.getInt("idIdTipoDeHabitacion"));
                 habi.setPiso(rs.getInt("piso"));
                 habi.setEstado(rs.getBoolean("estado"));
+                
                 System.out.println(habi.getIdHabitacion() + " - " + habi.getPiso());
             }
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se encontro el ID de la habitacion  ");
+            JOptionPane.showMessageDialog(null, "No se encontro el ID de la habitacion X");
         }
         return habi;
     }
