@@ -18,7 +18,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private HabitacionData hd = new HabitacionData();
     private ReservaData rd = new ReservaData();
     private HuespedData huespedD = new HuespedData();
-
     private int dniHu;  //  inportante variable global
     private int canp;     //  necesario argumento en el constructor
 
@@ -56,6 +55,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jTCantidadDias = new javax.swing.JTextField();
         jTPrecioTotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jBSalir = new javax.swing.JButton();
 
         setTitle("Reservas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -189,6 +189,14 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 1000, 230));
 
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -222,7 +230,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
                 break;
         }
     }//GEN-LAST:event_jCBTipoHabitacionActionPerformed
-
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         Reserva guardaReserva = new Reserva();
@@ -307,15 +314,10 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         rd.crearReserva(guardaReserva);
 
     }//GEN-LAST:event_jBGuardarActionPerformed
-
     private void jCHabitacionesDisponbilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCHabitacionesDisponbilesActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jCHabitacionesDisponbilesActionPerformed
-
     private void jTCantidadDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCantidadDiasActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTCantidadDiasActionPerformed
-
     private void jTDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDniActionPerformed
 
         try {
@@ -337,14 +339,22 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jTDniActionPerformed
-
     private void jTCantidadPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCantidadPersonasActionPerformed
-
     }//GEN-LAST:event_jTCantidadPersonasActionPerformed
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+     
+        int a = JOptionPane.YES_NO_OPTION;
+        int resultado = JOptionPane.showConfirmDialog(null, "Desea Salir?", "SALIR", a);
+        if (resultado == 0) {
+
+            this.dispose();
+        } 
+    }//GEN-LAST:event_jBSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<TipoDeHabitacion> jCBTipoHabitacion;
     private javax.swing.JComboBox<Habitacion> jCHabitacionesDisponbiles;
     private com.toedter.calendar.JDateChooser jDFechaEntrada;

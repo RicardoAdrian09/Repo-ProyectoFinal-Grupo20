@@ -18,11 +18,11 @@ public class Reserva {
     
      // constructor para modificar reserva.
     
-    public Reserva( LocalDate fechaInicio, LocalDate fechaFin,double precioFinal, boolean activo , int idReserva ) {
+    public Reserva( LocalDate fechaInicio, LocalDate fechaFin,double precioFinal,int cantidadDeDias , int idReserva ) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.precioFinal = precioFinal;
-        this.activo = activo;
+        this.cantidadDeDias= cantidadDeDias;
         this.idReserva=idReserva;
     }
 

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class ReservaData {
 
     Connection con = Conexion.getConexion();
@@ -30,9 +29,7 @@ public class ReservaData {
             PreparedStatement ps;
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             // metodo get de la entidad
-         
-            
-            
+
             ps.setInt(1, reserva.getHabitacion().getIdHabitacion());
             ps.setInt(2, reserva.getHuesped().getIdHuesped());
             ps.setDate(3, Date.valueOf(reserva.getFechaInicio()));
@@ -66,7 +63,7 @@ public class ReservaData {
             ps.setInt(1, id);
 
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Reserva eliminada con exito");
+            JOptionPane.showMessageDialog(null, "Registro  eliminado Satisfactotiamente !!");
 
             ps.close();
         } catch (SQLException ex) {
@@ -76,73 +73,62 @@ public class ReservaData {
 
     public void modificarReservaPorId(Reserva reserva) {
 
-//          (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,activo) VALUES (?,?,?,?,?,?)";
-        String sql = "UPDATE reserva  SET fechaInicio = ?, fechaFin = ?, precioTotal = ?, activo= ? WHERE idReserva = ?";
+        String sql = "UPDATE reserva  SET fechaInicio = ?, fechaFin = ?, precioTotal = ?, cantidadDeDias =?  WHERE idReserva = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setDate(1, Date.valueOf(reserva.getFechaInicio()));
             ps.setDate(2, Date.valueOf(reserva.getFechaFin()));
             ps.setDouble(3, reserva.getPrecioFinal());
-            ps.setBoolean(4, reserva.isActivo());
-            ps.setInt(5, reserva.getidReserva());
+            ps.setInt(4, reserva.getCantidadDeDias());
+            ps.setInt(5, reserva.getidReserva());  //  importante .. 
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "La reserva se actualizo correctamente");
+                JOptionPane.showMessageDialog(null, "El registro se actualizo correctamente");
             }
             ps.close();
 
         } catch (SQLException ex) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo modificar correctamente la reserva");
+            JOptionPane.showMessageDialog(null, "No se pudo encontro la reserva");
 
         }
     }
+
     public List<Reserva> listarReservas() {
 
-  String sql = "SELECT idReserva, idHabitacion, idHuesped, fechaInicio, fechaFin, precioTotal, cantPersonas, cantidadDeDias, activo FROM reserva";
+        String sql = "SELECT idReserva, idHabitacion, idHuesped, fechaInicio, fechaFin, precioTotal, cantPersonas, cantidadDeDias, activo FROM reserva";
 
+        List<Reserva> reservas = new ArrayList<>();
 
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
-//String sql = "SELECT r.idReserva, h.idHabitacion, hu.idHuesped, r.fechaInicio, r.fechaFin, r.precioTotal, r.cantPersonas, r.cantidadDeDias, r.activo " +
-//             "FROM reserva r " +
-//             "INNER JOIN habitacion h ON r.idHabitacion = h.idHabitacion " +
-//             "INNER JOIN huesped hu ON r.idHuesped = hu.idHuesped";
+            while (rs.next()) {
+                Reserva reserva = new Reserva();
+                HabitacionData hd = new HabitacionData();
+                HuespedData huespedD = new HuespedData();
+                reserva.setidReserva(rs.getInt("idReserva"));
 
+                reserva.setHabitacion(hd.buscarHabitacionPorId(rs.getInt("idHabitacion")));
+                reserva.setHuesped(huespedD.buscarHuespedPorId(rs.getInt("idHuesped")));
+                reserva.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                reserva.setFechaFin(rs.getDate("fechaFin").toLocalDate());
+                reserva.setPrecioFinal(rs.getDouble("precioTotal"));
+                reserva.setCantPersonas(rs.getInt("cantPersonas"));
+                reserva.setCantidadDeDias(rs.getInt("cantidadDeDias"));
+                reserva.setActivo(rs.getBoolean("activo"));
 
-    List<Reserva> reservas = new ArrayList<>();
-    
+                reservas.add(reserva);
+            }
 
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
-        while (rs.next()) {
-            Reserva reserva = new Reserva();
-            HabitacionData hd = new HabitacionData();
-            HuespedData huespedD = new HuespedData();
-            reserva.setidReserva(rs.getInt("idReserva"));
-            
-            
-            reserva.setHabitacion(hd.buscarHabitacionPorId(rs.getInt("idHabitacion")));
-            reserva.setHuesped(huespedD.buscarHuespedPorId(rs.getInt("idHuesped")));
-            reserva.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
-            reserva.setFechaFin(rs.getDate("fechaFin").toLocalDate());
-            reserva.setPrecioFinal(rs.getDouble("precioTotal"));
-            reserva.setCantPersonas(rs.getInt("cantPersonas"));
-            reserva.setCantidadDeDias(rs.getInt("cantidadDeDias"));
-            reserva.setActivo(rs.getBoolean("activo"));
-
-            reservas.add(reserva);
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista de reservas");
         }
-
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al cargar la lista de reservas");
+        return reservas;
     }
-    return reservas;
-}
 
-       
 }
