@@ -20,6 +20,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private HuespedData huespedD = new HuespedData();
     private int dniHu;  //  inportante variable global
     private int canp;     //  necesario argumento en el constructor
+//    private int tipoh;
 
     public VistaReserva() {
         initComponents();
@@ -56,7 +57,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jTPrecioTotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jBSalir = new javax.swing.JButton();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
         setTitle("Reservas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -197,7 +197,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, -1, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,11 +206,11 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
         int tdh = tipoh.getIdTipoDeHabitacion();
-        System.out.println(tipoh);
+       //System.out.println(tipoh);
 
         switch (tdh) {
             case 1:
-                jCHabitacionesDisponbiles.removeAllItems(); // voy limpiando el combo
+                jCHabitacionesDisponbiles.removeAllItems(); // voy limpiando el combo para otra consulta
                 hd.listarHabitacionesTipo1(); // mediante consulta SQL obtengo el listado de todas las habitaciones de tipo 1 desocupadas .
                 llenarCBHabitacionesDisponible1();
                 break;
@@ -256,26 +255,27 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             return;
         }
 
-// -------------------------------------------------------------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------------------------------------------------
         //  Control de fechas de ingreso y egreso
         Date fechaInicio = jDFechaEntrada.getDate();
         Date fechaSalida = jDFechaSalida.getDate();
         
-      
-            
-            
-        
-
         // Calculo diferencia de dias de la estadia
         LocalDate fecha1 = fechaInicio.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
         LocalDate fecha2 = fechaSalida.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
         
        if (fecha1.isAfter(fecha2) || fecha1.isEqual(fecha2)) {
-    JOptionPane.showMessageDialog(null, "¡Atención! La fecha de ingreso no puede ser posterior a la fecha de salida");
-     return;
-  } 
-        
-        
+            JOptionPane.showMessageDialog(null, "¡Atención! La fecha de ingreso no puede ser posterior a la fecha de salida");
+            
+
+        } else if    (fecha1.isBefore(LocalDate.now()) || fecha2.isBefore(LocalDate.now())) {
+
+              JOptionPane.showMessageDialog(null, "¡Atención! La fecha ingresada es anterior a la fecha actual. Por favor, seleccione una fecha válida");
+              
+
+   } else { // importante
+
+       
         long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
         String difedias = String.valueOf(difdias);
         int cantdias = (int) difdias;
@@ -304,16 +304,18 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
         // **************   crear un objeto y pasarlo a la consulta sql.  Respeta el orden del  constructor  ******************
-        guardaReserva.setHuesped(new Huesped(idhu));           // id hueped
+        guardaReserva.setHuesped(new Huesped(idhu));            // id hueped
         guardaReserva.setHabitacion(new Habitacion(idehab));    // id habitacion
         guardaReserva.setFechaInicio(fecha1);                   // fecha inicio
         guardaReserva.setFechaFin(fecha2);                      // fecha salida
-        guardaReserva.setCantPersonas(canp);                 // cantidad de personas
+        guardaReserva.setCantPersonas(canp);                    // cantidad de personas
         guardaReserva.setPrecioFinal(precioFinal);              // precio total
         guardaReserva.setCantidadDeDias(cantdias);              // cantidad de dias
         guardaReserva.setActivo(true);                          // estado
 
         rd.crearReserva(guardaReserva);
+        
+        }
 
     }//GEN-LAST:event_jBGuardarActionPerformed
     private void jCHabitacionesDisponbilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCHabitacionesDisponbilesActionPerformed
@@ -362,7 +364,6 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser jDFechaEntrada;
     private com.toedter.calendar.JDateChooser jDFechaSalida;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLHuesped;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
