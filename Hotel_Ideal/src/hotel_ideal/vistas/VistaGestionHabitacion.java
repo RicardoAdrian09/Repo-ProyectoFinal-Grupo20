@@ -23,6 +23,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
      */
     public VistaGestionHabitacion() {
         initComponents();
+        jcbTipoDeHabitacion.setSelectedIndex(-1);
     }
 
     /**
@@ -61,6 +62,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
         jLabel2.setText("Tipo de Habitacion");
 
         jcbTipoDeHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar Simple", "Doble ", "Triple", "Suite Lujo" }));
+        jcbTipoDeHabitacion.setSelectedIndex(1);
         jcbTipoDeHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbTipoDeHabitacionActionPerformed(evt);
@@ -286,12 +288,33 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
 
     private void BtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtBuscarActionPerformed
         if (!jtId.getText().isEmpty()) {
-//FALTA ASIGNAR EL TIPO DE HABITACION EN EL COMBO BOX !!!
+
             int id = Integer.parseInt(jtId.getText());
-            
+
             Habitacion habitacion = new HabitacionData().buscarHabitacionPorId(id);
             if (habitacion != null) {
-                jcbTipoDeHabitacion.setSelectedItem(habitacion.getIdTipoDeHab());
+
+                int tipoHabitacion = habitacion.getIdTipoDeHab();
+                String tipoHabi;
+                switch (tipoHabitacion) {
+                    case 1:
+                        tipoHabi = "Estandar Simple";
+                        break;
+                    case 2:
+                        tipoHabi = "Doble";
+                        break;
+                    case 3:
+                        tipoHabi = "Triple";
+                        break;
+                    case 4:
+                        tipoHabi = "Suite Lujo";
+                        break;
+                    default:
+                        tipoHabi = "";
+                        break;
+                }
+
+                jcbTipoDeHabitacion.setSelectedItem(tipoHabi);
                 jtPiso.setText(habitacion.getPiso() + "");
                 jrbEstado.setSelected(habitacion.isEstado());
             } else {
@@ -301,11 +324,11 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtBuscarActionPerformed
 
     private void BtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLimpiarActionPerformed
-        // TODO add your handling code here:
-//        JtId.setText("");
-//        JtNumero.setText("");
-//        JtPiso.setText("");
-//        jcOcupado.setSelected(false);
+        
+        jtId.setText("");
+        jcbTipoDeHabitacion.setSelectedIndex(-1);
+        jtPiso.setText("");
+        jrbEstado.setSelected(false);
 
     }//GEN-LAST:event_BtLimpiarActionPerformed
 
