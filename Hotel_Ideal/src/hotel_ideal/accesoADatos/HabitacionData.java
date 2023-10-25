@@ -46,12 +46,13 @@ public class HabitacionData {
 
     public void modificarHabitacion(Habitacion habitacion) {
         try {
-            String sql = "UPDATE habitacion SET idTipoDeHabitacion=?,piso=? WHERE idHabitacion=?";
+            String sql = "UPDATE habitacion SET idTipoDeHabitacion=?,piso=?,estado=? WHERE idHabitacion=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps = con.prepareStatement(sql);
             ps.setInt(1, habitacion.getIdTipoDeHab());
             ps.setInt(2, habitacion.getPiso());
-            ps.setInt(3, habitacion.getIdHabitacion());
+            ps.setBoolean(3, habitacion.isEstado());
+            ps.setInt(4, habitacion.getIdHabitacion());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -60,6 +61,7 @@ public class HabitacionData {
 
                 JOptionPane.showMessageDialog(null, "La habitacion no existe en la base de datos");
             }
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
         }

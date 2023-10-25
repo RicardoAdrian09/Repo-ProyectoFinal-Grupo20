@@ -260,29 +260,32 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        // TODO add your handling code here:
-        //        int id_habitacion = Integer.parseInt(JtId.getText());
-        //        int numero = Integer.parseInt(JtNumero.getText());
-        //        int piso = Integer.parseInt(JtPiso.getText());
-        //        boolean estado = Boolean.parseBoolean("true");
-        //        TipoDeHabitacion tipo_de_habitacion = tipoDeHabitacionData.buscarxTipoDeHabitacion(JtTipo.getText());
-        //        Habitacion habitacion=new Habitacion(id_habitacion,numero,piso,estado,tipo_de_habitacion);
-        //        habitacionData.actualizarHabitacion(habitacion);
-        //        //JtId.setText(habitacion.getId_habitacion()+"");
-        //        JOptionPane.showMessageDialog(rootPane, "La Habitacion Nro "+ numero +" se guardó Correctamente");
+//Arreglar da error
+        int idHabi = Integer.parseInt(jtId.getText());
+        int tipoHabi = (int) jcbTipoDeHabitacion.getSelectedItem();
+        int piso = Integer.parseInt(jtPiso.getText());
+        boolean estado = jrbEstado.isSelected();
+
+//        TipoDeHabitacion tipo_de_habitacion = tipoDeHabitacionData.buscarxTipoDeHabitacion(JtTipo.getText());
+        Habitacion habitacion = new Habitacion(idHabi, tipoHabi, piso, estado);
+        habitacionData.modificarHabitacion(habitacion);
+        jtId.setText(habitacion.getIdHabitacion() + "");
+        JOptionPane.showMessageDialog(rootPane, "La Habitacion N°: " + idHabi + ", se guardó Correctamente");
+
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void jBborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBborrarActionPerformed
-        // TODO add your handling code here:
-//        int id = Integer.parseInt(JtId.getText());
-//        habitacionData.borrarHabitacion(id);
-//        
-//         JOptionPane.showMessageDialog(null, " La habitación se borró satisfactoriamente ");
-//        
-//         JtId.setText("");
-//        JtNumero.setText("");
-//        JtPiso.setText("");
-//       jcOcupado.setSelected(false);
+//Arreglar da error
+        int id = Integer.parseInt(jtId.getText());
+        habitacion.setIdHabitacion(id);
+        habitacionData.bajaHabitacion(habitacion);
+
+        JOptionPane.showMessageDialog(null, " La habitación N°:" + habitacion + ", se borró satisfactoriamente ");
+
+        jtId.setText("");
+        jcbTipoDeHabitacion.setSelectedIndex(-1);
+        jtPiso.setText("");
+        jrbEstado.setSelected(false);
 
     }//GEN-LAST:event_jBborrarActionPerformed
 
@@ -324,7 +327,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtBuscarActionPerformed
 
     private void BtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLimpiarActionPerformed
-        
+
         jtId.setText("");
         jcbTipoDeHabitacion.setSelectedIndex(-1);
         jtPiso.setText("");
