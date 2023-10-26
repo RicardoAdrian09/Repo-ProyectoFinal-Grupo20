@@ -160,8 +160,8 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(45, 45, 45)
+                                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
                                         .addComponent(BtBuscar))
                                     .addComponent(jLabel6))))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -238,7 +238,6 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Por favor ingrese un numero");
         }
 
-        
 //OTRA FORMA DE BUSCAR SELECCIONANDO DESDE LA TABLA LA HABITACION Y MOSTRANDO 
 //SUS DATOS Y LUEGO ADMINISTRAR. PERO ESTÁ EN PROCESO DE PRUEBA
 //        int filaOcupadas = jtOcupadas.getSelectedRow();
@@ -261,40 +260,39 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
 
         try {
+        int idHabi = Integer.parseInt(jtId.getText());
 
-            int idHabi = Integer.parseInt(jtId.getText());
+        String eleccionTipoHab = (String) jcbTipoDeHabitacion.getSelectedItem();
 
-            String eleccionTipoHab = (String) jcbTipoDeHabitacion.getSelectedItem();
-
-            int idTpoHab;
-            switch (eleccionTipoHab) {
-                case "Estandar Simple":
-                    idTpoHab = 1;
-                    break;
-                case "Doble":
-                    idTpoHab = 2;
-                    break;
-                case "Triple":
-                    idTpoHab = 3;
-                    break;
-                case "Suite Lujo":
-                    idTpoHab = 4;
-                    break;
-                default:
-                    idTpoHab = 0; // Valor por defecto si no se encuentra ninguna coincidencia
-                    break;
-            }
-
-            int piso = Integer.parseInt(jtPiso.getText());
-            boolean estado = jrbEstado.isSelected();
+        int idTpoHab;
+        switch (eleccionTipoHab) {
+            case "Estandar Simple":
+                idTpoHab = 1;
+                break;
+            case "Doble":
+                idTpoHab = 2;
+                break;
+            case "Triple":
+                idTpoHab = 3;
+                break;
+            case "Suite Lujo":
+                idTpoHab = 4;
+                break;
+            default:
+                idTpoHab = 0; // Valor por defecto si no se encuentra ninguna coincidencia
+                break;
+        }
+        System.out.println(idTpoHab);
+        int piso = Integer.parseInt(jtPiso.getText());
+        boolean estado = jrbEstado.isSelected();
 
 //        TipoDeHabitacion tipo_de_habitacion = tipoDeHabitacionData.buscarxTipoDeHabitacion(JtTipo.getText());
-            habitacion = new Habitacion(idHabi, idTpoHab, piso, estado);
-            habitacionData.modificarHabitacion(habitacion);
-            jtId.setText(habitacion.getIdHabitacion() + "");
-            JOptionPane.showMessageDialog(rootPane, "La Habitacion N°: " + idHabi + ", se guardó Correctamente");
+        Habitacion habitacion = new Habitacion(idHabi, idTpoHab, piso, estado);
+        habitacionData.modificarHabitacion(habitacion);
+        jtId.setText(habitacion.getIdHabitacion() + "");
+        JOptionPane.showMessageDialog(rootPane, "La Habitacion N°: " + idHabi + ", se guardó Correctamente");
 
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese un numero");
         }
 
