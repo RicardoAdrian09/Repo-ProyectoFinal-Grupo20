@@ -97,7 +97,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -123,22 +123,20 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jDFechaEntrada" min="-2" pref="41" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jDFechaEntrada" alignment="1" min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="jDFechaSalida" alignment="1" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTId" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="jTId" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="jLBusquedaporid" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -281,7 +279,7 @@
         <Component class="javax.swing.JTextField" name="jTId">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="24" style="0"/>
+              <Font name="Dialog" size="18" style="0"/>
             </Property>
           </Properties>
           <Events>
@@ -331,7 +329,7 @@
         <Component class="javax.swing.JButton" name="jBGuardarCambios">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/boton guardar.png"/>
+              <Image iconType="3" name="/Imagenes/guardad.png"/>
             </Property>
           </Properties>
           <Events>

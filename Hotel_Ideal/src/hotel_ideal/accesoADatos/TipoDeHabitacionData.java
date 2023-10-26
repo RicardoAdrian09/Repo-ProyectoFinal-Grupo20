@@ -74,7 +74,7 @@ public class TipoDeHabitacionData {
         TipoDeHabitacion tipoDeHabitacion = null;
         try {
             
-            String sql = "SELECT * FROM tipodehabitacion WHERE tipo = ? ;";
+            String sql = "SELECT * FROM tipodehabitacion WHERE idTipoDeHabitacion  = ? ;";
 
             PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, tipo);
@@ -102,6 +102,37 @@ public class TipoDeHabitacionData {
         return tipoDeHabitacion;
     }
      
-     
+   public TipoDeHabitacion buscarTipoDeHabitacion(int idtipodehab){
+        TipoDeHabitacion tipoDeHabitacion = null;
+        try {
+            
+            String sql = "SELECT * FROM tipodehabitacion WHERE idTipoDeHabitacion = ? ";
+
+            PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setInt(1,idtipodehab );
+           
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                tipoDeHabitacion = new TipoDeHabitacion();
+                tipoDeHabitacion.setIdTipoDeHabitacion(resultSet.getInt("idTipoDeHabitacion"));
+                tipoDeHabitacion.setTipo(resultSet.getString("tipo"));
+                tipoDeHabitacion.setCantPersonas(resultSet.getInt("cantidadDePersonas"));
+                tipoDeHabitacion.setCantCamas(resultSet.getInt("cantCamas"));
+                tipoDeHabitacion.setTipoDeCama(resultSet.getString("tipoDeCamas"));
+                tipoDeHabitacion.setPrecioPorNoche(resultSet.getInt("PrecioPorNoche"));
+
+                
+            }      
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar un Tipo De Habitacion: " + ex.getMessage());
+        }
+        
+        return tipoDeHabitacion;
+    }  
      
 }

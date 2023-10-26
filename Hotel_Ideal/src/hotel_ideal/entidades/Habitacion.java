@@ -52,6 +52,8 @@ public class Habitacion {
     public Habitacion() {
     }
 
+  
+
     public int getIdTipoDeHab() {
         return idTipoDeHab;
     }

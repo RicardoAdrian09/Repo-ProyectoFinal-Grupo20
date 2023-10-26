@@ -131,4 +131,47 @@ public class ReservaData {
         return reservas;
     }
 
+     public Reserva buscarReservaPorId(int idReser) {
+        Reserva reserva = null;
+        PreparedStatement ps = null;
+
+        try {
+            String sql = "SELECT * FROM reserva WHERE idReserva = ? ";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idReser);
+            ResultSet rs = ps.executeQuery();
+//             HabitacionData hd = new HabitacionData();
+//             TipoDeHabitacionData tdh =new TipoDeHabitacionData ();
+             
+             
+            if (rs.next()) {
+                reserva = new Reserva();
+
+                reserva.setidReserva(rs.getInt("idReserva"));
+//                reserva.setHabitacion(hd.buscarHabitacionPorId(rs.getInt("idHabitacion")));
+//                reserva.setHabitacion(hd.buscarHabitacionPorId(tdh.buscarxTipoDeHabitacion( rs.getObject("idTipoDeHabitacion"))));
+//                
+                
+
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontro el ID de la reserva ");
+        }
+        return reserva;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -5,8 +5,12 @@
  */
 package hotel_ideal.vistas;
 
+import hotel_ideal.accesoADatos.HabitacionData;
 import hotel_ideal.accesoADatos.ReservaData;
+import hotel_ideal.accesoADatos.TipoDeHabitacionData;
+import hotel_ideal.entidades.Habitacion;
 import hotel_ideal.entidades.Reserva;
+import hotel_ideal.entidades.TipoDeHabitacion;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -22,7 +26,12 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
     private ReservaData rd = new ReservaData();
     private DefaultTableModel modelo = new DefaultTableModel();
+    private HabitacionData hd = new HabitacionData();
+    private TipoDeHabitacionData tdh2 = new TipoDeHabitacionData();
     int filaSeleccionada;
+    int precioEstadia;
+    int idseleccionado;
+    int idHabseleccionado;
 
     public GestionReservasView() {
         initComponents();
@@ -120,7 +129,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             }
         });
 
-        jTId.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jTId.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTIdActionPerformed(evt);
@@ -148,7 +157,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBGuardarCambios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton guardar.png"))); // NOI18N
+        jBGuardarCambios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardad.png"))); // NOI18N
         jBGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarCambiosActionPerformed(evt);
@@ -222,7 +231,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                                 .addGap(83, 83, 83))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jBSalir)
-                                .addContainerGap())))))
+                                .addGap(30, 30, 30))))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,19 +247,18 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDFechaEntrada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDFechaSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLBusquedaporid, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -279,7 +287,6 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             this.dispose();
         }
 
-//        doDefaultCloseAction();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jTReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReservaMouseClicked
@@ -291,9 +298,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             jDFechaEntrada.setEnabled(true);
             jDFechaSalida.setEnabled(true);
 
-
         }
-
 
     }//GEN-LAST:event_jTReservaMouseClicked
 
@@ -310,51 +315,103 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             return;
         }
 
-        // diferencia entre ambas fechas.
+        // diferencia entre ambas fechas
         long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
         String difedias = String.valueOf(difdias);
         int cantdias = (int) difdias;
+// -----------------------------------------------------------------------------------  
 
-        // Calculo del precio de la estadia !!
-        int precioEstadia = (int) difdias * 5000;
+        // Calculo del precio de la estadia !!  Nuevo!!
+        Object id = modelo.getValueAt(filaSeleccionada, 0);   // obtengo el id de la tacla
 
-        // Habilito la celdas y llena el campo de cantidad de dias.
-        jTReserva.setValueAt(fecha1, filaSeleccionada, 3);
-        jTReserva.setValueAt(fecha2, filaSeleccionada, 4);
-        jTReserva.setValueAt(cantdias, filaSeleccionada, 7);
-        jTReserva.setValueAt(precioEstadia, filaSeleccionada, 5);
-        
-     // ---------------------------------------------------------------------------------------------------------------------------------------------------
+        System.out.println("el id es :" + id);   // ok 
 
-        // una vez modificada la reserva en la tabla  , al momento de guardar la misma tengo la necesidad de ubicar esa reserva en la lista de la tabla.Para ubicar la reserva tengo que recorrer la lista.
-        String idseleccionado = modelo.getValueAt(filaSeleccionada, 0).toString();   // obtengo id de la tabla clickeada 
-        int idselecentero = Integer.parseInt(idseleccionado);
-        
+        idseleccionado = Integer.parseInt(id.toString());    // id lo paso a idseleccionado
+
+        System.out.println("idselescionado :" + idseleccionado); //ok 
+
+        Object idHab = modelo.getValueAt(filaSeleccionada, 1);  // ---- idHabitacion NUEVO 
+
+        idHabseleccionado = Integer.parseInt(idHab.toString());   // idHab lo paso a idHabseleecionado
+
+        // -----------------------------------------------------------------------------------   
+        // 1°   ubicar la reserva en la lista  de la tabla
         Reserva reservaSeleccionada = null;
-        List<Reserva> reservas = rd.listarReservas();  // misma lista que cargo en la tabla 
-        for (Reserva reserva : reservas) {
-            if (String.valueOf(reserva.getidReserva()).equals(idseleccionado)) {   // id reserva en un int ,necesito pasar a Sstring 
+
+        List<Reserva> reservas2 = rd.listarReservas();
+
+        for (Reserva reserva : reservas2) {
+            if (reserva.getidReserva() == Integer.parseInt(id.toString())) {   // id reserva en un int ,necesito pasar a Sstring 
                 reservaSeleccionada = reserva;
+                System.out.println(" reserva : " + reserva);  // ok 
+                System.out.println(" reserva seleccionaca : " + reservaSeleccionada);  // ok
+
                 break;
+
             }
         }
 
         if (reservaSeleccionada != null) {
-            rd.modificarReservaPorId(new Reserva(fecha1, fecha2, precioEstadia, cantdias, idselecentero));  // Encuentro la reserva y  paso  la reserva como argumento al método
-          
-        } else {
 
-            JOptionPane.showMessageDialog(null, " ID seleccionado inexitente : " + idseleccionado);  // Si no encuentro Maneja el caso en el que la reserva no se encontró
+            Reserva ffff = rd.buscarReservaPorId(idseleccionado);   // obtengo   ID reserva BD
+
+            System.out.println("ffff : " + ffff);
+
+            Habitacion idHabi = hd.buscarHabitacionPorId(idHabseleccionado);
+
+            System.out.println("idHabi  : " + idHabi);
+
+            int idtdh = idHabi.getIdTipoDeHab();
+
+            System.out.println("idtdh :" + idHabi.getIdTipoDeHab());
+
+            TipoDeHabitacion tdh = tdh2.buscarTipoDeHabitacion(idtdh);
+            
+               int resultado;
+            resultado = tdh.getPrecioPorNoche();
+            
+               precioEstadia = (int) (difdias * resultado);
+                    
+                
+
+        // Habilito la celdas y llena el campo de cantidad de dias.
+        
+        
+            jTReserva.setValueAt(fecha1, filaSeleccionada, 3);
+            jTReserva.setValueAt(fecha2, filaSeleccionada, 4);
+            jTReserva.setValueAt(cantdias, filaSeleccionada, 7);
+            jTReserva.setValueAt(precioEstadia, filaSeleccionada, 5);
+        
+        
+        
+        // ---------------------------------------------------------------------------------------------------------------------------------------------------
+        // una vez modificada la reserva en la tabla  , al momento de guardar la misma tengo la necesidad de ubicar esa reserva en la lista de la tabla.Para ubicar la reserva tengo que recorrer la lista.
+        String idseleccionado = modelo.getValueAt(filaSeleccionada, 0).toString();   // obtengo id de la tabla clickeada  - NECESARIO ??? REPETIDO !!
+        int idselecentero = Integer.parseInt(idseleccionado);
+//       Reserva reservaSeleccionada = null;
+        List<Reserva> reservas = rd.listarReservas();  // Ubico la reseva en lista || misma lista que cargo en la tabla 
+        for (Reserva reserva : reservas) {          // para ubicar la reserva tengo que recorrer la lista con un FOR.
+//            if (String.valueOf(reserva.getidReserva()).equals(idseleccionado)) {   // id reserva en un int ,necesito pasar a Sstring 
+            
+               if  (reserva.getidReserva() == Integer.parseInt(id.toString())) {
+                
+                reservaSeleccionada = reserva;
+                break;
+            }
         }
         
+          rd.modificarReservaPorId(new Reserva(fecha1, fecha2, precioEstadia, cantdias, idseleccionado));
         
         jDFechaEntrada.setDate(null);
-        jDFechaSalida.setDate (null) ;
-        
-        
-        
-        
-   
+        jDFechaSalida.setDate(null);
+            
+            
+        } else {
+
+            JOptionPane.showMessageDialog(null, " ID seleccionado esle inexitente : " + idseleccionado);  // Si no encuentro Maneja el caso en el que la reserva no se encontró
+        }
+
+
     }//GEN-LAST:event_JBGuardarActionPerformed
 
     private void jBEliminarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarReservasActionPerformed
@@ -374,26 +431,6 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
     private void jTIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTIdActionPerformed
 
-
-           
-        
-           
-        
-        
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
         // TODO add your handling code here:
     }//GEN-LAST:event_jTIdActionPerformed
 
@@ -410,14 +447,14 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         for (int i = 0; i < jTReserva.getRowCount(); i++) {
             int idReserva = (int) jTReserva.getValueAt(i, 0); // Suponiendo que el idReserva se encuentra en la primera columna
             if (idReserva == idseleccionadoEntero) {
-               filaSeleccionada = i;
-                System.out.println("indice 1°: "+ filaSeleccionada ); //ok 
+                filaSeleccionada = i;
+                System.out.println("indice 1°: " + filaSeleccionada); //ok 
                 break;
             }
         }
 
-                jDFechaEntrada.setEnabled(true);
-                jDFechaSalida.setEnabled(true);
+        jDFechaEntrada.setEnabled(true);
+        jDFechaSalida.setEnabled(true);
 
     }//GEN-LAST:event_jBuscarActionPerformed
 
@@ -452,9 +489,9 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                     System.out.println("reserva seleccionada :" + reservaSeleccionada);
                     break;
                 }
-             }
+            }
 
-             if (reservaSeleccionada != null) {    // ENCUENTRA ID 
+            if (reservaSeleccionada != null) {    // ENCUENTRA ID 
 
                 if (jDFechaEntrada.getDate() == null || jDFechaSalida.getDate() == null) {   // Ambos DateChooser están vacíos o tienen una fecha no seleccionada
 
@@ -507,9 +544,9 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
         }
 
-           jDFechaEntrada.setDate(null);
-           jDFechaSalida.setDate(null);
-           jTId.setText("");
+        jDFechaEntrada.setDate(null);
+        jDFechaSalida.setDate(null);
+        jTId.setText("");
     }//GEN-LAST:event_jBGuardarCambiosActionPerformed
 
 
