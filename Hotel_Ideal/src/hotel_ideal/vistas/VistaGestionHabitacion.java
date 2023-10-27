@@ -23,7 +23,6 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
      */
     public VistaGestionHabitacion() {
         initComponents();
-        jcbTipoDeHabitacion.setSelectedIndex(-1);
     }
 
     /**
@@ -62,7 +61,6 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
         jLabel2.setText("Tipo de Habitacion");
 
         jcbTipoDeHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar Simple", "Doble ", "Triple", "Suite Lujo" }));
-        jcbTipoDeHabitacion.setSelectedIndex(1);
         jcbTipoDeHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbTipoDeHabitacionActionPerformed(evt);
@@ -211,23 +209,27 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
         try {
             String eleccionTipoHab = (String) jcbTipoDeHabitacion.getSelectedItem();
 
-            int idTpoHab;
-            switch (eleccionTipoHab) {
-                case "Estandar Simple":
-                    idTpoHab = 1;
-                    break;
-                case "Doble":
-                    idTpoHab = 2;
-                    break;
-                case "Triple":
-                    idTpoHab = 3;
-                    break;
-                case "Suite Lujo":
-                    idTpoHab = 4;
-                    break;
-                default:
-                    idTpoHab = 0; // Valor por defecto si no se encuentra ninguna coincidencia
-                    break;
+            int idTpoHab = 0;
+
+            if (eleccionTipoHab!=null) {
+
+                switch (eleccionTipoHab) {
+
+                    case "Estandar Simple":
+                        idTpoHab = 1;
+                        break;
+                    case "Doble":
+                        idTpoHab = 2;
+                        break;
+                    case "Triple":
+                        idTpoHab = 3;
+                        break;
+                    case "Suite Lujo":
+                        idTpoHab = 4;
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de habitacion antes de guardar o modificar");
             }
 
             int piso = Integer.parseInt(jtPiso.getText());
@@ -260,37 +262,37 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
 
         try {
-        int idHabi = Integer.parseInt(jtId.getText());
+            int idHabi = Integer.parseInt(jtId.getText());
 
-        String eleccionTipoHab = (String) jcbTipoDeHabitacion.getSelectedItem();
+            String eleccionTipoHab = (String) jcbTipoDeHabitacion.getSelectedItem();
 
-        int idTpoHab;
-        switch (eleccionTipoHab) {
-            case "Estandar Simple":
-                idTpoHab = 1;
-                break;
-            case "Doble":
-                idTpoHab = 2;
-                break;
-            case "Triple":
-                idTpoHab = 3;
-                break;
-            case "Suite Lujo":
-                idTpoHab = 4;
-                break;
-            default:
-                idTpoHab = 0; // Valor por defecto si no se encuentra ninguna coincidencia
-                break;
-        }
-        System.out.println(idTpoHab);
-        int piso = Integer.parseInt(jtPiso.getText());
-        boolean estado = jrbEstado.isSelected();
+            int idTpoHab;
+            switch (eleccionTipoHab) {
+                case "Estandar Simple":
+                    idTpoHab = 1;
+                    break;
+                case "Doble":
+                    idTpoHab = 2;
+                    break;
+                case "Triple":
+                    idTpoHab = 3;
+                    break;
+                case "Suite Lujo":
+                    idTpoHab = 4;
+                    break;
+                default:
+                    idTpoHab = 0; // Valor por defecto si no se encuentra ninguna coincidencia
+                    break;
+            }
+            System.out.println(idTpoHab);
+            int piso = Integer.parseInt(jtPiso.getText());
+            boolean estado = jrbEstado.isSelected();
 
 //        TipoDeHabitacion tipo_de_habitacion = tipoDeHabitacionData.buscarxTipoDeHabitacion(JtTipo.getText());
-        Habitacion habitacion = new Habitacion(idHabi, idTpoHab, piso, estado);
-        habitacionData.modificarHabitacion(habitacion);
-        jtId.setText(habitacion.getIdHabitacion() + "");
-        JOptionPane.showMessageDialog(rootPane, "La Habitacion N°: " + idHabi + ", se guardó Correctamente");
+            Habitacion habitacion = new Habitacion(idHabi, idTpoHab, piso, estado);
+            habitacionData.modificarHabitacion(habitacion);
+            jtId.setText(habitacion.getIdHabitacion() + "");
+            JOptionPane.showMessageDialog(rootPane, "La Habitacion N°: " + idHabi + ", se guardó Correctamente");
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Por favor ingrese un numero");
