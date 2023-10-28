@@ -5,6 +5,10 @@
  */
 package hotel_ideal.vistas;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
+
 public class VistaPrincipal extends javax.swing.JFrame {
     
  
@@ -12,14 +16,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
         initComponents();
               
     }
-
+    public void determinarFondo(){
+        JLabel fondo = new JLabel();
+        fondo.setIcon(new ImageIcon("/Imagenes/hotel11"));
+        fondo.setBounds(0, 0, escritorio.getWidth(), escritorio.getHeight());
+        fondo.setOpaque(true);
+        escritorio.add(fondo);
+        
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         escritorio = new javax.swing.JDesktopPane();
-        jLabel2 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMHuesped = new javax.swing.JMenuItem();
@@ -33,32 +44,26 @@ public class VistaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        escritorio.setBackground(new java.awt.Color(0, 102, 204));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hotel11.jpg"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        jLabel2.setText("HOTEL IDEAL");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
-
-        escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(fondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(549, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(541, 541, 541))
+            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1400, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(346, 346, 346)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 794, Short.MAX_VALUE))
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 1410, 900));
+        fondo.getAccessibleContext().setAccessibleName("fondo");
+
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 1400, 800));
 
         jMenu1.setText("Huesped");
         jMenu1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -138,10 +143,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
+       
         VistaHuesped vi = new VistaHuesped();
-        vi.setVisible(true);  
+        
+        vi.setVisible(true); 
+        escritorio.add(fondo);
         escritorio.add(vi);
+        escritorio.moveToBack(fondo);
         escritorio.moveToFront(vi);
+        
     }//GEN-LAST:event_jMHuespedActionPerformed
 
     private void jmReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservaActionPerformed
@@ -150,8 +160,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
         VistaReserva vi = new VistaReserva();
-        vi.setVisible(true);  
+        vi.setVisible(true);
+        escritorio.add(fondo);
         escritorio.add(vi);
+        escritorio.moveToBack(fondo);
         escritorio.moveToFront(vi);
         
     }//GEN-LAST:event_jmReservaActionPerformed
@@ -162,7 +174,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         VistaHabitaciones vh = new VistaHabitaciones();
         vh.setVisible(true);
+        escritorio.add(fondo);
         escritorio.add(vh);
+        escritorio.moveToBack(fondo);
         escritorio.moveToFront(vh);
         
     }//GEN-LAST:event_jmHabitacionesActionPerformed
@@ -174,7 +188,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         GestionReservasView gr = new GestionReservasView();
         gr.setVisible(true);
+        escritorio.add(fondo);
         escritorio.add(gr);
+        escritorio.moveToBack(fondo);
         escritorio.moveToFront(gr);
 
     }//GEN-LAST:event_jMGestionReservasActionPerformed
@@ -185,7 +201,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         VistaGestionHabitacion gh = new VistaGestionHabitacion();
         gh.setVisible(true);
+        escritorio.add(fondo);
         escritorio.add(gh);
+        escritorio.moveToBack(fondo);
         escritorio.moveToFront(gh);
         
     }//GEN-LAST:event_jmGestionDeHabitacionesActionPerformed
@@ -193,7 +211,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel fondo;
     private javax.swing.JMenuItem jMGestionReservas;
     private javax.swing.JMenuItem jMHuesped;
     private javax.swing.JMenu jMenu1;
