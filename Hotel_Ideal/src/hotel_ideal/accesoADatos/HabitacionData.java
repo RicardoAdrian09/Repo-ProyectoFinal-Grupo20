@@ -56,7 +56,7 @@ public class HabitacionData {
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "La habitacion N°: "+habitacion.getIdHabitacion()+". Ha sido modificada exitosamente");
+                JOptionPane.showMessageDialog(null, "La habitacion ha sido modificada exitosamente");
             } else {
 
                 JOptionPane.showMessageDialog(null, "La habitacion no existe en la base de datos");
