@@ -363,7 +363,7 @@ public class VistaGestionHabitacion extends javax.swing.JInternalFrame {
     private void BtLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLimpiarActionPerformed
 
         jtId.setText("");
-        jcbTipoDeHabitacion.setSelectedIndex(-1);
+        jcbTipoDeHabitacion.setSelectedIndex(0);
         jtPiso.setText("");
         jrbEstado.setSelected(false);
 

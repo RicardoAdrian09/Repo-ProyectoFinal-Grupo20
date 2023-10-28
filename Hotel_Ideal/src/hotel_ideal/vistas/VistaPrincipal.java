@@ -35,7 +35,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMHuesped = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jmHabitaciones = new javax.swing.JMenuItem();
         jmGestionDeHabitaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jmReserva = new javax.swing.JMenuItem();
@@ -86,15 +85,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Habitaciones");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        jmHabitaciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jmHabitaciones.setText("Habitaciones");
-        jmHabitaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmHabitacionesActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jmHabitaciones);
 
         jmGestionDeHabitaciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jmGestionDeHabitaciones.setText("Gestion de Habitaciones");
@@ -168,19 +158,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmReservaActionPerformed
 
-    private void jmHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmHabitacionesActionPerformed
-
-        escritorio.removeAll();
-        escritorio.repaint();
-        VistaHabitaciones vh = new VistaHabitaciones();
-        vh.setVisible(true);
-        escritorio.add(fondo);
-        escritorio.add(vh);
-        escritorio.moveToBack(fondo);
-        escritorio.moveToFront(vh);
-        
-    }//GEN-LAST:event_jmHabitacionesActionPerformed
-
     private void jMGestionReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionReservasActionPerformed
        
         
@@ -199,12 +176,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         escritorio.removeAll();
         escritorio.repaint();
-        VistaGestionHabitacion gh = new VistaGestionHabitacion();
-        gh.setVisible(true);
+        VistaHabitacionAMB ghAMB = new VistaHabitacionAMB();
+        ghAMB.setVisible(true);
         escritorio.add(fondo);
-        escritorio.add(gh);
+        escritorio.add(ghAMB);
         escritorio.moveToBack(fondo);
-        escritorio.moveToFront(gh);
+        escritorio.moveToFront(ghAMB);
         
     }//GEN-LAST:event_jmGestionDeHabitacionesActionPerformed
 
@@ -219,7 +196,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmGestionDeHabitaciones;
-    private javax.swing.JMenuItem jmHabitaciones;
     private javax.swing.JMenuItem jmReserva;
     // End of variables declaration//GEN-END:variables
 }
