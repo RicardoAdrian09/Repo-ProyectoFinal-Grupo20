@@ -20,7 +20,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private HuespedData huespedD = new HuespedData();
     private int dniHu;  //  inportante variable global
     private int canp;     //  necesario argumento en el constructor
-//    private int tipoh;
+
 
     public VistaReserva() {
         initComponents();
@@ -66,42 +66,42 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Tipo de Habitacion : ");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Fecha Check IN : ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Check OUT :");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
-        getContentPane().add(jDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 240, 30));
-        getContentPane().add(jDFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 240, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+        getContentPane().add(jDFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 240, 30));
+        getContentPane().add(jDFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 240, 30));
 
         jCBTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBTipoHabitacionActionPerformed(evt);
             }
         });
-        getContentPane().add(jCBTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 710, 38));
+        getContentPane().add(jCBTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 730, 38));
 
         jCHabitacionesDisponbiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCHabitacionesDisponbilesActionPerformed(evt);
             }
         });
-        getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 490, 40));
+        getContentPane().add(jCHabitacionesDisponbiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 490, 40));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setText("Lista Habitaciones Disponibles :");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         jTCantidadPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTCantidadPersonasActionPerformed(evt);
             }
         });
-        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 230, 30));
+        getContentPane().add(jTCantidadPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 230, 30));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel10.setText("Cantidad de personas: ");
@@ -159,36 +159,38 @@ public class VistaReserva extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBGuardar)
-                .addGap(407, 407, 407))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(427, 427, 427)
+                .addComponent(jBGuardar)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addComponent(jLabel8)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(jTCantidadDias, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addGap(300, 300, 300)
                 .addComponent(jLabel9)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(jTPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+                .addGap(62, 62, 62))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jBGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTCantidadDias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(jTPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
+                .addGap(41, 41, 41))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jBGuardar)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 1000, 230));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 1000, 140));
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +208,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         TipoDeHabitacion tipoh = (TipoDeHabitacion) jCBTipoHabitacion.getSelectedItem();
         int tdh = tipoh.getIdTipoDeHabitacion();
-       //System.out.println(tipoh);
+      
 
         switch (tdh) {
             case 1:
@@ -235,7 +237,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
 
         Reserva guardaReserva = new Reserva();
 
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------       
+ //-----------------------------------------------------------------------------------------------------------------------------------------------------       
         //  Control de cantidad de personas Vs. Capacidad de la habitacion
         try {
             String canPersonas = jTCantidadPersonas.getText();   // ingreso cantidad de personas.
@@ -255,67 +257,80 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             return;
         }
 
-        // -------------------------------------------------------------------------------------------------------------------------------------------------------
+ // -------------------------------------------------------------------------------------------------------------------------------------------------------
         //  Control de fechas de ingreso y egreso
         Date fechaInicio = jDFechaEntrada.getDate();
         Date fechaSalida = jDFechaSalida.getDate();
-        
+
         // Calculo diferencia de dias de la estadia
         LocalDate fecha1 = fechaInicio.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
         LocalDate fecha2 = fechaSalida.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-        
-       if (fecha1.isAfter(fecha2) || fecha1.isEqual(fecha2)) {
+
+        if (fecha1.isAfter(fecha2) || fecha1.isEqual(fecha2)) {
             JOptionPane.showMessageDialog(null, "¡Atención! La fecha de ingreso no puede ser posterior a la fecha de salida");
-            
 
-        } else if    (fecha1.isBefore(LocalDate.now()) || fecha2.isBefore(LocalDate.now())) {
+        } else if (fecha1.isBefore(LocalDate.now()) || fecha2.isBefore(LocalDate.now())) {
 
-              JOptionPane.showMessageDialog(null, "¡Atención! La fecha ingresada es anterior a la fecha actual. Por favor, seleccione una fecha válida");
-              
+            JOptionPane.showMessageDialog(null, "¡Atención! La fecha ingresada es anterior a la fecha actual. Por favor, seleccione una fecha válida");
 
-   } else { // importante
+        } else { // importante
 
-       
-        long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
-        String difedias = String.valueOf(difdias);
-        int cantdias = (int) difdias;
+            long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
+            String difedias = String.valueOf(difdias);
+            int cantdias = (int) difdias;
 
-        // Habilito la celdas y llena el campo de cantidad de dias.
-        jTCantidadDias.setEnabled(true);
-        jTPrecioTotal.setEnabled(true);
-        jTCantidadDias.setText(difedias);
+            // Habilito la celdas y llena el campo de cantidad de dias.
+            jTCantidadDias.setEnabled(true);
+            jTPrecioTotal.setEnabled(true);
+            jTCantidadDias.setText(difedias);
 
-        // Calculo del precio de la estadia !!
-        int precioEstadia = (int) difdias * 5000;
-        double precioEstadiad = (double) precioEstadia;
-        double precioFinal = precioEstadiad;
+            // Calculo del precio de la estadia .
+            int preciopornoche = tipoh.getPrecioPorNoche();
 
-        String precioEstadia2String = String.valueOf(precioEstadia);
-        jTPrecioTotal.setText(precioEstadia2String);
-        // --------------------------------------------------------------------------------------------------------------------------------------------------
+            int precioEstadia = (preciopornoche * cantdias);
 
-        // Lista de Habitaciones Disponibles
-        Habitacion habit = (Habitacion) jCHabitacionesDisponbiles.getSelectedItem();
-        int idehab = habit.getIdHabitacion();  // necesario para armar el constructor 
+            double precioEstadia2 = (double) precioEstadia;
+            double precioFinal = precioEstadia2;
 
-        // --------------------------------------------------------------------------------------------------------------------------------------------
-        Huesped xxxx = huespedD.buscarHuespedPorDni(dniHu);
-        int idhu = xxxx.getIdHuesped();   // necesario para armar el construcotr 
+            String precioEstadia2String = String.valueOf(precioEstadia);
+            jTPrecioTotal.setText(precioEstadia2String);
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------
+            // Lista de Habitaciones Disponibles
+            Habitacion habit = (Habitacion) jCHabitacionesDisponbiles.getSelectedItem();
+            int idehab = habit.getIdHabitacion();  // necesario para armar el constructor .
+
+// --------------------------------------------------------------------------------------------------------------------------------------------
+            Huesped xxxx = huespedD.buscarHuespedPorDni(dniHu);
+            int idhu = xxxx.getIdHuesped();   // necesario para armar el construcotr. 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
-        // **************   crear un objeto y pasarlo a la consulta sql.  Respeta el orden del  constructor  ******************
-        guardaReserva.setHuesped(new Huesped(idhu));            // id hueped
-        guardaReserva.setHabitacion(new Habitacion(idehab));    // id habitacion
-        guardaReserva.setFechaInicio(fecha1);                   // fecha inicio
-        guardaReserva.setFechaFin(fecha2);                      // fecha salida
-        guardaReserva.setCantPersonas(canp);                    // cantidad de personas
-        guardaReserva.setPrecioFinal(precioFinal);              // precio total
-        guardaReserva.setCantidadDeDias(cantdias);              // cantidad de dias
-        guardaReserva.setActivo(true);                          // estado
 
-        rd.crearReserva(guardaReserva);
-        
+            //  Crear un objeto respetando  orden del  constructor .
+            guardaReserva.setHuesped(new Huesped(idhu));            // id hueped
+            guardaReserva.setHabitacion(new Habitacion(idehab));    // id habitacion
+            guardaReserva.setFechaInicio(fecha1);                   // fecha inicio
+            guardaReserva.setFechaFin(fecha2);                      // fecha salida
+            guardaReserva.setCantPersonas(canp);                    // cantidad de personas
+            guardaReserva.setPrecioFinal(precioFinal);              // precio total
+            guardaReserva.setCantidadDeDias(cantdias);              // cantidad de dias
+            guardaReserva.setActivo(true);                          // estado
+            // Modifico BD
+            rd.crearReserva(guardaReserva); 
+
+            int a = JOptionPane.YES_NO_OPTION;
+            int resultado = JOptionPane.showConfirmDialog(null, "Desea generar otra reserva ? ", "Consulta ", a);
+            if (resultado == 1) {
+
+                this.dispose();
+
+            } else {
+
+                limpiarCampos();
+            }
+
         }
+
 
     }//GEN-LAST:event_jBGuardarActionPerformed
     private void jCHabitacionesDisponbilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCHabitacionesDisponbilesActionPerformed
@@ -330,7 +345,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             dniHu = Integer.valueOf(dniH);    // dnI ingresado paso a INT
 
             Huesped ffff = huespedD.buscarHuespedPorDni(dniHu);    //  obtengo objeto  tipo Huesped llamado ffff
-            String ddddd = String.valueOf(ffff);    // paso dni a String
+            String ddddd = String.valueOf(ffff);  
 
             if (ffff == null) {
                 jTHuesped1.setText("");
@@ -346,13 +361,13 @@ public class VistaReserva extends javax.swing.JInternalFrame {
     private void jTCantidadPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCantidadPersonasActionPerformed
     }//GEN-LAST:event_jTCantidadPersonasActionPerformed
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-     
+
         int a = JOptionPane.YES_NO_OPTION;
         int resultado = JOptionPane.showConfirmDialog(null, "Desea Salir?", "SALIR", a);
         if (resultado == 0) {
 
             this.dispose();
-        } 
+        }
     }//GEN-LAST:event_jBSalirActionPerformed
 
 

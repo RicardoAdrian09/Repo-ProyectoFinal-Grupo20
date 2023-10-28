@@ -283,4 +283,31 @@ public class HabitacionData {
         }
         return habi;
     }
+    
+    
+    public void pasarHabitacionaDesocupada(Habitacion habitacion) {
+
+        try {
+            String sql = "UPDATE habitacion SET estado=0 WHERE idHabitacion=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, habitacion.getIdHabitacion());
+
+  //          ps.setInt(2, habitacion.getIdHabitacion());  // iimportante : no hace falta por que yaesta seteado el valor a cero.
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, " Habitación  " + habitacion.getIdHabitacion() + "  disponible.");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No hay habitaciones disponibles hoy");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    
+    }
 }

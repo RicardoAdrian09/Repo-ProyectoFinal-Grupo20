@@ -48,10 +48,6 @@ public class Reserva {
     public Reserva() {
         
     }
-
-    public Reserva(LocalDate fecha1, LocalDate fecha2, int precioEstadia, int cantdias, String idseleccionado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
       // guetter and setters 
     

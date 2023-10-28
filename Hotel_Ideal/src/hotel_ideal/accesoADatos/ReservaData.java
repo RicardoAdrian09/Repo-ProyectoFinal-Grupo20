@@ -45,7 +45,7 @@ public class ReservaData {
             if (rs.next()) {
                 reserva.setidReserva(rs.getInt(1));
 
-                JOptionPane.showMessageDialog(null, "Reserva  generada  satisfatoriamente. ID RESERVA generaDo :   " + rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Reserva  generada  satisfatoriamente. ID RESERVA generado :   " + rs.getInt(1));
             }
 
             ps.close();
@@ -61,6 +61,29 @@ public class ReservaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            
+            // Antes de eliminar la reserva, cambia el estado de la habitación a inactivo
+
+        String Sql2 = "UPDATE habitacion SET activo = false WHERE idHabitacion = ?";
+        PreparedStatement ps2 = con.prepareStatement(Sql2);
+        ps2.setInt(1, id); // Supongo que el ID de la habitación es el mismo que el de la reserva, ajusta si es diferente
+
+        // Realiza la actualización
+        ps2.executeUpdate();
+        ps2.close();
+            
+          // Antes de eliminar la reserva, cambia el estado de la habitación a inactivo
+
+        String updateSql = "UPDATE habitaciones SET activo = false WHERE idHabitacion = ?";
+        PreparedStatement updatePs = con.prepareStatement(updateSql);
+        updatePs.setInt(1, id); // Supongo que el ID de la habitación es el mismo que el de la reserva, ajusta si es diferente
+
+        // Realiza la actualización
+        updatePs.executeUpdate();
+        updatePs.close();  
+            
+            
+            
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro  eliminado Satisfactotiamente !!");
@@ -69,6 +92,8 @@ public class ReservaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar la reserva");
         }
+        
+        
     }
 
     public void modificarReservaPorId(Reserva reserva) {
@@ -131,7 +156,7 @@ public class ReservaData {
         return reservas;
     }
 
-     public Reserva buscarReservaPorId(int idReser) {
+    public Reserva buscarReservaPorId(int idReser) {
         Reserva reserva = null;
         PreparedStatement ps = null;
 
@@ -140,18 +165,11 @@ public class ReservaData {
             ps = con.prepareStatement(sql);
             ps.setInt(1, idReser);
             ResultSet rs = ps.executeQuery();
-//             HabitacionData hd = new HabitacionData();
-//             TipoDeHabitacionData tdh =new TipoDeHabitacionData ();
-             
-             
+
             if (rs.next()) {
                 reserva = new Reserva();
 
                 reserva.setidReserva(rs.getInt("idReserva"));
-//                reserva.setHabitacion(hd.buscarHabitacionPorId(rs.getInt("idHabitacion")));
-//                reserva.setHabitacion(hd.buscarHabitacionPorId(tdh.buscarxTipoDeHabitacion( rs.getObject("idTipoDeHabitacion"))));
-//                
-                
 
             }
 
@@ -161,17 +179,5 @@ public class ReservaData {
         }
         return reserva;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
