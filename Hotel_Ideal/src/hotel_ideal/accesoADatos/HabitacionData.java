@@ -295,7 +295,7 @@ public class HabitacionData {
                 ps.setInt(2, habitacion.getIdHabitacion());
 
             int exito = ps.executeUpdate();
-            if (exito == 1) {
+            if (exito ==  1) {
                 JOptionPane.showMessageDialog(null, " Habitación  " + habitacion.getIdHabitacion() + "  disponible.");
             } else {
 

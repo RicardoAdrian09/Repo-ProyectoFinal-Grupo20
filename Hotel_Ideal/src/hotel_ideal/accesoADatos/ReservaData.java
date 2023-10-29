@@ -69,29 +69,17 @@ public class ReservaData {
     }
 
     public void eliminarReservaPorId(int id) {
-
-        Reserva reserva = buscarReservaPorId(id);
-//        int reservaanulada = reserva.getHabitacion().getIdHabitacion();
-
+  
         try {
-
-            // Elimino reserva
+           
             String sql = "DELETE FROM reserva WHERE idReserva = ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro  eliminado  , se actualiza estado de Habitacion a  Disponible");
+            JOptionPane.showMessageDialog(null, "Registro  eliminado correctamnte");
             ps.close();
 
-            // Cambio estado de habitacion .
-            String Sql2 = "UPDATE habitacion SET activo = ? WHERE idHabitacion = ?";
-            PreparedStatement ps2 = con.prepareStatement(Sql2);
-            ps2.setBoolean(1, false);
-            ps2.setInt(2, reserva.getHabitacion().getIdHabitacion());
-            // Realiza la actualización
-            ps2.executeUpdate();
-            ps2.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar la reserva");
@@ -199,10 +187,9 @@ public class ReservaData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, " Reserva " + reserva.getidReserva() + " culminada");
             }
-//            else {
-//
-//                JOptionPane.showMessageDialog(null, "Hoy no  hay reservas finalizadas ");
-//            }
+            else {
+
+               JOptionPane.showMessageDialog(null, "Hoy no  hay reservas que finalizan en el dia de la fecha ");            }
             ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);

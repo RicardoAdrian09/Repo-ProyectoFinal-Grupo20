@@ -134,6 +134,11 @@ public class Reserva {
         this.cantPersonas = cantPersonas;
     }
 
+    @Override
+    public String toString() {
+        return "Reserva{" + "idReserva=" + idReserva + ", huesped=" + huesped + ", habitacion=" + habitacion + ", fechaFin=" + fechaFin + ", fechaInicio=" + fechaInicio + ", precioFinal=" + precioFinal + ", cantPersonas=" + cantPersonas + ", cantidadDeDias=" + cantidadDeDias + ", activo=" + activo + '}';
+    }
+
   
 
    

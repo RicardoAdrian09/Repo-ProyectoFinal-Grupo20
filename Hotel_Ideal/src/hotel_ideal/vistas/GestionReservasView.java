@@ -540,19 +540,18 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBEliminarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarReservasActionPerformed
-
-        filaSeleccionada = jTReserva.getSelectedRow(); // si o si selecciono una fila
+   filaSeleccionada = jTReserva.getSelectedRow(); // si o si selecciono una fila
         int a = JOptionPane.YES_NO_OPTION;
         int resultado = JOptionPane.showConfirmDialog(null, "Confirma que desea eliminar el registro ?", "SALIR", a);
         if (resultado == 0) {
             String idseleccionado = modelo.getValueAt(filaSeleccionada, 0).toString();
             int idselecentero = Integer.parseInt(idseleccionado);
             rd.eliminarReservaPorId(idselecentero);
-                    
             
             modelo.removeRow(filaSeleccionada);
 
         }
+           
     }//GEN-LAST:event_jBEliminarReservasActionPerformed
 
     private void jTReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTReservaMouseClicked
@@ -635,7 +634,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
             LocalDate fechafinreserva2 = (LocalDate) controlfechasalida;
 
-            if (fechafinreserva2.isAfter(LocalDate.now())) {
+            if (fechafinreserva2.isAfter(LocalDate.now())) {  // fecha salida mayor a fecha actual 
                 Object idHabDisp = jTReserva.getValueAt(i, 1);
                 Object idRes = jTReserva.getValueAt(i, 0);
 
@@ -643,8 +642,8 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                 
                 int idRes2= Integer.parseInt(idRes.toString());
 
-                Habitacion habbuscada;
-                habbuscada = hd.buscarHabitacionPorId(idHabDisp2);
+                
+              Habitacion habbuscada = hd.buscarHabitacionPorId(idHabDisp2);
 
                 hd.pasarHabitacionaDesocupada(habbuscada);
                 
