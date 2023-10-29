@@ -24,6 +24,8 @@ public class ReservaData {
 
     public void crearReserva(Reserva reserva) {
 
+       HabitacionData hd = new HabitacionData();
+
         String sql = "INSERT INTO reserva (idHabitacion,idHuesped,fechaInicio ,fechaFin,precioTotal,cantPersonas,cantidadDeDias, activo) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
@@ -48,56 +50,50 @@ public class ReservaData {
                 reserva.setidReserva(rs.getInt(1));
 
                 JOptionPane.showMessageDialog(null, "Reserva  generada  satisfatoriamente. ID RESERVA generado :   " + rs.getInt(1));
+                JOptionPane.showMessageDialog(null, " Habitacion  : " + reserva.getHuesped().getIdHuesped() + " pasa a estado Ocupada");
             }
 
             ps.close();
+
+            // Consulta para actualizar el estado de la habitación
+            String Sql = "UPDATE habitacion SET estado = ? WHERE idHabitacion = ?";
+            PreparedStatement Ps = con.prepareStatement(Sql);
+            Ps.setBoolean(1, true);
+            Ps.setInt(2, reserva.getHabitacion().getIdHabitacion());
+            Ps.executeUpdate();
+            Ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " No se pudo  generar la reserva. ");
         }
     }
 
+
     public void eliminarReservaPorId(int id) {
-        String sql = "DELETE FROM reserva WHERE idReserva = ?";
+       String sql = "DELETE FROM reserva WHERE idReserva = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            
+
             // Antes de eliminar la reserva, cambia el estado de la habitación a inactivo
+            String Sql2 = "UPDATE habitacion SET activo = false WHERE idHabitacion = ?";
+            PreparedStatement ps2 = con.prepareStatement(Sql2);
+            ps2.setInt(1, id); 
 
-        String Sql2 = "UPDATE habitacion SET activo = false WHERE idHabitacion = ?";
-        PreparedStatement ps2 = con.prepareStatement(Sql2);
-        ps2.setInt(1, id); // Supongo que el ID de la habitación es el mismo que el de la reserva, ajusta si es diferente
-
-        // Realiza la actualización
-        ps2.executeUpdate();
-        ps2.close();
-            
-          // Antes de eliminar la reserva, cambia el estado de la habitación a inactivo
-
-        String updateSql = "UPDATE habitaciones SET activo = false WHERE idHabitacion = ?";
-        PreparedStatement updatePs = con.prepareStatement(updateSql);
-        updatePs.setInt(1, id); // Supongo que el ID de la habitación es el mismo que el de la reserva, ajusta si es diferente
-
-        // Realiza la actualización
-        updatePs.executeUpdate();
-        updatePs.close();  
-            
-            
-            
+            // Realiza la actualización
+            ps2.executeUpdate();
+            ps2.close();
 
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro  eliminado Satisfactotiamente !!");
+            JOptionPane.showMessageDialog(null, "Registro  eliminado  , se actualiza a estado Disponible el estado de la habitacion correspondiente  ");
 
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar la reserva");
         }
-        
-        
-    }
 
+    }
     public void modificarReservaPorId(Reserva reserva) {
 
         String sql = "UPDATE reserva  SET fechaInicio = ?, fechaFin = ?, precioTotal = ?, cantidadDeDias =?  WHERE idReserva = ?";

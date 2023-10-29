@@ -319,23 +319,16 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                     String difedias = String.valueOf(difdias);
                     int cantdias = (int) difdias;
 
-                    // Calculo del precio de la estadia !!
-                    //                    int precioEstadia = (int) difdias * 5000;
-                    // Calculo del precio de la estadia !!  Nuevo!!
                     Object id = modelo.getValueAt(filaSeleccionada, 0);   // OBTENGO ID DE LA TABLA
 
-                 
-
                     int idseleccionado2 = Integer.parseInt(id.toString());    // id lo paso a idseleccionado2 , de string a int. RENOMBRAR VAVIABLE
-
-                  
 
                     Object idHab = modelo.getValueAt(filaSeleccionada, 1);  // ---- idHabitacion NUEVO
 
                     idHabseleccionado = Integer.parseInt(idHab.toString());   // idHab lo paso a idHabseleecionado
 
                     // 1°   ubicar la reserva en la lista  de la tabla
-                    //        Reserva reservaSeleccionada = null;
+                   
                     List<Reserva> reservas2 = rd.listarReservas();
 
                     for (Reserva reserva : reservas2) {
@@ -376,9 +369,9 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                         jTReserva.setValueAt(cantdias, filaSeleccionada, 7);
 
                         jTReserva.setModel(modelo);
-
                       
                         // MODIFICO EN BASE DE DATOS
+                        
                         rd.modificarReservaPorId(new Reserva(fecha1, fecha2, precioEstadia, cantdias, idseleccionadoEntero));  // Encuentro la reserva y  paso  la reserva como argumento al método
 
                     } else {
@@ -392,8 +385,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                     jDFechaEntrada.setDate(null);
                     jDFechaSalida.setDate(null);
                     jTId.setText("");
-                    
-                     controlDiarioDeHabitacionDisponible();
+                
                     
                 }
                 
@@ -419,10 +411,10 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         int filaSeleccionada2 = -1;
 
         for (int i = 0; i < jTReserva.getRowCount(); i++) {
-            int idReserva = (int) jTReserva.getValueAt(i, 0); // Suponiendo que el idReserva se encuentra en la primera columna
+            int idReserva = (int) jTReserva.getValueAt(i, 0); 
             if (idReserva == idseleccionadoEntero) {
                 filaSeleccionada2 = i;
-                System.out.println("indice 1°: " + filaSeleccionada2); //ok
+               
                 break;
             }
         }
@@ -444,28 +436,23 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             return;
         }
         
-        
-        
-
-        // diferencia entre ambas fechas
+        // calulo diferencia entre ambas fechas
         long difdias = ChronoUnit.DAYS.between(fecha1, fecha2);
         String difedias = String.valueOf(difdias);
         int cantdias = (int) difdias;
-        // -----------------------------------------------------------------------------------
 
-        // Calculo del precio de la estadia !!  Nuevo!!
+        // Calculo del precio de la estadia 
+        
         Object id = modelo.getValueAt(filaSeleccionada, 0);   // obtengo el id de la tacla
 
-
         idseleccionado = Integer.parseInt(id.toString());    // id lo paso a idseleccionado , de string a int.
-
 
         Object idHab = modelo.getValueAt(filaSeleccionada, 1);  // ---- idHabitacion NUEVO
 
         idHabseleccionado = Integer.parseInt(idHab.toString());   // idHab lo paso a idHabseleecionado
-
-        // -----------------------------------------------------------------------------------
+        
         // 1°   ubicar la reserva en la lista  de la tabla
+        
         Reserva reservaSeleccionada = null;
 
         List<Reserva> reservas2 = rd.listarReservas();
@@ -473,7 +460,6 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         for (Reserva reserva : reservas2) {
             if (reserva.getidReserva() == Integer.parseInt(id.toString())) {   // id reserva en un int ,necesito pasar a Sstring
                 reservaSeleccionada = reserva;
-                
 
                 break;
 
@@ -528,11 +514,11 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             jDFechaEntrada.setDate(null);
             jDFechaSalida.setDate(null);
 
-            controlDiarioDeHabitacionDisponible ();
+            
             
         } else {
 
-            JOptionPane.showMessageDialog(null, " ID seleccionado esle inexitente : " + idseleccionado);  // Si no encuentro Maneja el caso en el que la reserva no se encontró
+            JOptionPane.showMessageDialog(null, " ID seleccionado esle inexitente : " + idseleccionado); 
         }
 
     }//GEN-LAST:event_JBGuardarActionPerformed
@@ -644,23 +630,18 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         for (int i = 0; i < jTReserva.getRowCount(); i++) {
             Object controlfechasalida = jTReserva.getValueAt(i, 4);
 
-//            java.util.Date fechafinreserva = (java.util.Date) controlfechasalida;
             LocalDate fechafinreserva2 = (LocalDate) controlfechasalida;
 
             if (fechafinreserva2.isAfter(LocalDate.now())) {
                 Object idHabDisp = jTReserva.getValueAt(i, 1);
                 Object idRes = jTReserva.getValueAt(i, 0);
-                
-                
 
                 int idHabDisp2 = Integer.parseInt(idHabDisp.toString());  // ok 
                 
                 int idRes2= Integer.parseInt(idRes.toString());
-                
 
                 Habitacion habbuscada;
                 habbuscada = hd.buscarHabitacionPorId(idHabDisp2);
-               
 
                 hd.pasarHabitacionaDesocupada(habbuscada);
                 

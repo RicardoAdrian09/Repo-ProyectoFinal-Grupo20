@@ -314,7 +314,7 @@ public class VistaReserva extends javax.swing.JInternalFrame {
             guardaReserva.setCantPersonas(canp);                    // cantidad de personas
             guardaReserva.setPrecioFinal(precioFinal);              // precio total
             guardaReserva.setCantidadDeDias(cantdias);              // cantidad de dias
-            guardaReserva.setActivo(true);                          // estado
+            guardaReserva.setActivo(true);                          // / estado reserva Importante 
             // Modifico BD
             rd.crearReserva(guardaReserva); 
 
