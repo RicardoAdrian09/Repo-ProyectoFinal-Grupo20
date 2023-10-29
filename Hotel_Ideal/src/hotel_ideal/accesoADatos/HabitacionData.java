@@ -1,7 +1,6 @@
 package hotel_ideal.accesoADatos;
 
 import hotel_ideal.entidades.Habitacion;
-import hotel_ideal.entidades.Huesped;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,13 +22,13 @@ public class HabitacionData {
 
     public void altaHabitacion(Habitacion habitacion) {
         try {
-            String sql = "INSERT INTO habitacion (idHabitacion, idTipoDeHabitacion, piso, estado) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO habitacion (idTipoDeHabitacion, piso, estado) VALUES (?,?,?)";
             PreparedStatement ps;
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, habitacion.getIdHabitacion());
-            ps.setInt(2, habitacion.getIdTipoDeHab());   // tipo de habitacion
-            ps.setInt(3, habitacion.getPiso());          //  en que piso se da de alta la habitacion
-            ps.setBoolean(4, true);                      // si esta en servicio 
+            
+            ps.setInt(1, habitacion.getIdTipoDeHab());   // tipo de habitacion
+            ps.setInt(2, habitacion.getPiso());          //  en que piso se da de alta la habitacion
+            ps.setBoolean(3, habitacion.isEstado());                      // si esta en servicio 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

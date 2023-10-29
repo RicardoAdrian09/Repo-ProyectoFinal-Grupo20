@@ -1,8 +1,6 @@
 package hotel_ideal.vistas;
 
-import hotel_ideal.accesoADatos.HabitacionData;
 import hotel_ideal.accesoADatos.TipoDeHabitacionData;
-import hotel_ideal.entidades.Habitacion;
 import hotel_ideal.entidades.TipoDeHabitacion;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -439,7 +437,7 @@ public class VistaHabitacionAMB extends javax.swing.JInternalFrame {
         jcbTipoDeHabitacion.setSelectedIndex(0);
         jtPiso.setText("");
         jrbEstado.setSelected(false);
-        
+
     }//GEN-LAST:event_BtLimpiarActionPerformed
 
     private void jcbTipoDeHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoDeHabitacionActionPerformed
@@ -552,7 +550,7 @@ public class VistaHabitacionAMB extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, " La habitación N°:" + habitacion + ", se borró satisfactoriamente ");
 
             jtId.setText("");
-            jcbTipoDeHabitacion.setSelectedIndex(-1);
+            jcbTipoDeHabitacion.setSelectedIndex(0);
             jtPiso.setText("");
             jrbEstado.setSelected(false);
         } catch (NumberFormatException e) {
@@ -602,16 +600,31 @@ public class VistaHabitacionAMB extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtBuscarActionPerformed
 
     private void jcbBuscarTipoDeHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBuscarTipoDeHabitacionActionPerformed
-        
-        String tipoHabitacion = (String) jcbBuscarTipoDeHabitacion.getSelectedItem();
-        
-        tipoDeHabitacion = new TipoDeHabitacionData().buscarxTipoDeHabitacion(tipoHabitacion);
-        
-        jtCantidadDePersonas.setText(tipoDeHabitacion.getCantPersonas()+"");
-        jtCantidadDeCamas.setText(tipoDeHabitacion.getCantCamas()+"");
-        jtTipoDeCamas.setText(tipoDeHabitacion.getTipoDeCama()+"");
-        jtPrecioPorNoche.setText(tipoDeHabitacion.getPrecioPorNoche()+"");
-        
+
+        int tipoHabiSeleccionada = (int) jcbBuscarTipoDeHabitacion.getSelectedIndex();
+
+        int tipoHabi = 0;
+        switch (tipoHabiSeleccionada) {
+            case 0:
+                tipoHabi = 1;
+                break;
+            case 1:
+                tipoHabi = 2;
+                break;
+            case 2:
+                tipoHabi = 3;
+                break;
+            case 3:
+                tipoHabi = 4;
+        }
+
+        TipoDeHabitacion datosTipoHabi = tipoDeHabitacionData.buscarTipoDeHabitacion(tipoHabi);
+
+        jtCantidadDePersonas.setText(datosTipoHabi.getCantPersonas() + "");
+        jtCantidadDeCamas.setText(datosTipoHabi.getCantCamas() + "");
+        jtTipoDeCamas.setText(datosTipoHabi.getTipoDeCama() + "");
+        jtPrecioPorNoche.setText(datosTipoHabi.getPrecioPorNoche() + "");
+
     }//GEN-LAST:event_jcbBuscarTipoDeHabitacionActionPerformed
 
     private void jBSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalir2ActionPerformed
@@ -633,29 +646,37 @@ public class VistaHabitacionAMB extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCantidadDePersonasActionPerformed
 
     private void jbModificarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarPrecioActionPerformed
-        
-        
+
+        try {
+            
         int precio = Integer.parseInt(jtPrecioPorNoche.getText());
-        
-        
+        String tipoHabitacionSeleccionada = (String) jcbBuscarTipoDeHabitacion.getSelectedItem();
+
+        String tipo = "";
+        switch (tipoHabitacionSeleccionada) {
+            case "Estandar Simple":
+                tipo = "Estandar Simple";
+                break;
+            case "Doble":
+                tipo = "Estandar Doble";
+                break;
+            case "Triple":
+                tipo = "Estandar Triple";
+                break;
+            case "Suite Lujo":
+                tipo = "Suite Lujo";
+                break;
+        }
+
+        tipoDeHabitacion = new TipoDeHabitacion(tipo, precio);
+
+        tipoDeHabitacionData.cambiarPrecio(tipoDeHabitacion);
+
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un numero");
+        }
         
     }//GEN-LAST:event_jbModificarPrecioActionPerformed
-
-    public void cargarTablas() {
-        HabitacionData hd = new HabitacionData();
-        List<Habitacion> hab = hd.obtenerHabitaciones();
-        for (Habitacion arg : hab) {
-            if (arg.isEstado() == true) {
-                modelo.addRow(new Object[]{
-                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
-                });
-            } else {
-                modelo2.addRow(new Object[]{
-                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
-                });
-            }
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtBuscar;
@@ -694,7 +715,8 @@ public class VistaHabitacionAMB extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtPrecioPorNoche;
     private javax.swing.JTextField jtTipoDeCamas;
     // End of variables declaration//GEN-END:variables
-private void armarCabeceraOcupadas() {
+
+    private void armarCabeceraOcupadas() {
         modelo.addColumn("N° Habitacion");
         modelo.addColumn("Tipo Habitacion");
         modelo.addColumn("Piso");
@@ -706,6 +728,22 @@ private void armarCabeceraOcupadas() {
         modelo2.addColumn("Tipo Habitacion");
         modelo2.addColumn("Piso");
         jtDesocupadas.setModel(modelo2);
-    } 
+    }
+
+    public void cargarTablas() {
+        HabitacionData hd = new HabitacionData();
+        List<Habitacion> hab = hd.obtenerHabitaciones();
+        for (Habitacion arg : hab) {
+            if (arg.isEstado() == true) {
+                modelo.addRow(new Object[]{
+                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
+                });
+            } else {
+                modelo2.addRow(new Object[]{
+                    arg.getIdHabitacion(), arg.getIdTipoDeHab(), arg.getPiso()
+                });
+            }
+        }
+    }
 
 }

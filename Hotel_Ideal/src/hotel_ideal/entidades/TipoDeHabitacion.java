@@ -34,6 +34,15 @@ public class TipoDeHabitacion {
         this.idTipoDeHabitacion = idTipoDeHabitacion;
         this.tipo = tipo;
     }
+
+    public TipoDeHabitacion(String tipo, int precioPorNoche) {
+        this.tipo = tipo;
+        this.precioPorNoche = precioPorNoche;
+    }
+
+    public TipoDeHabitacion(String tipo) {
+        this.tipo = tipo;
+    }
     
     public TipoDeHabitacion() {
     }
