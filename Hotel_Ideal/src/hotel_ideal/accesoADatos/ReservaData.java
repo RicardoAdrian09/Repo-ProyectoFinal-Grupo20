@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ReservaData {
@@ -179,5 +181,33 @@ public class ReservaData {
         }
         return reserva;
     }
+    
+    public void pasarReservaaInactivo ( Reserva reserva){
+        
+       try {
+            String sql = "UPDATE reserva SET estado=0 WHERE idResarva=?";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
+           
+                ps.setBoolean(1, reserva.isActivo());  // importante
+                ps.setInt(2, reserva.getidReserva());
 
-}
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, " Reserva " + reserva.getidReserva()+ " culminada");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No hay reservas finalizadas ");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    
+    }
+        
+    }
+

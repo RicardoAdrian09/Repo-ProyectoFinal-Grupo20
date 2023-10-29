@@ -284,23 +284,22 @@ public class HabitacionData {
         return habi;
     }
     
-    
     public void pasarHabitacionaDesocupada(Habitacion habitacion) {
 
         try {
             String sql = "UPDATE habitacion SET estado=0 WHERE idHabitacion=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps = con.prepareStatement(sql);
-            ps.setInt(1, habitacion.getIdHabitacion());
-
-  //          ps.setInt(2, habitacion.getIdHabitacion());  // iimportante : no hace falta por que yaesta seteado el valor a cero.
+           
+                ps.setBoolean(1, habitacion.isEstado());  // importante
+                ps.setInt(2, habitacion.getIdHabitacion());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, " Habitación  " + habitacion.getIdHabitacion() + "  disponible.");
             } else {
 
-                JOptionPane.showMessageDialog(null, "No hay habitaciones disponibles hoy");
+                JOptionPane.showMessageDialog(null, "Hoy no se generan habitaciones disponibles por check out  o cancelaciones");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -310,4 +309,32 @@ public class HabitacionData {
 
     
     }
+    
+    public void pasarHabitacionaOcupada(Habitacion habitacion) {
+
+        try {
+            String sql = "UPDATE habitacion SET estado=1 WHERE idHabitacion=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
+           
+                ps.setBoolean(1, habitacion.isEstado());  // importante
+                ps.setInt(2, habitacion.getIdHabitacion());
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, " Habitación  " + habitacion.getIdHabitacion() + " pasa a estado Ocupada ");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No se encotro habitacion requerida ");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(HabitacionData.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    
+    }
+    
+    
 }

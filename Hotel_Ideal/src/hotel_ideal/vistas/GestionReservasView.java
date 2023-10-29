@@ -60,6 +60,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jBuscar = new javax.swing.JButton();
         jBGuardarCambios = new javax.swing.JButton();
+        jBControlDiario = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -166,6 +167,13 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jBControlDiario.setText("Control Diario");
+        jBControlDiario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBControlDiarioActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jLBusquedasReservas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLBusquedaporid, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -180,6 +188,7 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jBGuardarCambios, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBControlDiario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -203,7 +212,9 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(450, 450, 450)
+                                .addGap(32, 32, 32)
+                                .addComponent(jBControlDiario)
+                                .addGap(341, 341, 341)
                                 .addComponent(jLBusquedasReservas))
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jDFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +252,8 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLBusquedasReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBSalir))
+                            .addComponent(jBSalir)
+                            .addComponent(jBControlDiario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTId, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -588,10 +600,17 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTReservaMouseClicked
 
+    private void jBControlDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBControlDiarioActionPerformed
+        // TODO add your handling code here:
+        
+        controlDiarioDeHabitacionDisponible();
+    }//GEN-LAST:event_jBControlDiarioActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGuardar;
+    private javax.swing.JButton jBControlDiario;
     private javax.swing.JButton jBEliminarReservas;
     private javax.swing.JButton jBGuardarCambios;
     private javax.swing.JButton jBSalir;
@@ -654,10 +673,14 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
             if (fechafinreserva2.isAfter(LocalDate.now())) {
                 Object idHabDisp = jTReserva.getValueAt(i, 1);
+                Object idRes = jTReserva.getValueAt(i, 0);
                 
                 System.out.println("idHabDisp :   " + idHabDisp );   // ok 
 
                 int idHabDisp2 = Integer.parseInt(idHabDisp.toString());  // ok 
+                
+                int idRes2= Integer.parseInt(idRes.toString());
+                
 
                 Habitacion habbuscada;
                 habbuscada = hd.buscarHabitacionPorId(idHabDisp2);
@@ -665,7 +688,10 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
 
                 hd.pasarHabitacionaDesocupada(habbuscada);
                 
+               Reserva reservaBuscada ;
+               reservaBuscada= rd.buscarReservaPorId(idRes2);
                 
+                 rd.pasarReservaaInactivo(reservaBuscada);
                 
                 
              }
