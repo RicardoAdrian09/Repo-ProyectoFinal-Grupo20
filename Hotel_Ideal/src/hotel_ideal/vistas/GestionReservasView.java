@@ -6,6 +6,7 @@ import hotel_ideal.accesoADatos.TipoDeHabitacionData;
 import hotel_ideal.entidades.Habitacion;
 import hotel_ideal.entidades.Reserva;
 import hotel_ideal.entidades.TipoDeHabitacion;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -402,6 +403,18 @@ public class GestionReservasView extends javax.swing.JInternalFrame {
             int idReserva = (int) jTReserva.getValueAt(i, 0);
             if (idReserva == idseleccionadoEntero) {
                 filaSeleccionada2 = i;
+                
+              // Resalta la fila si se cumple la condición  
+             jTReserva.getSelectionModel().setSelectionInterval(i, i);   
+                
+              // Puedes cambiar el color de fondo de la fila
+            jTReserva.setSelectionBackground(Color.YELLOW);  
+                
+                // También puedes cambiar el color del texto si es necesario
+            jTReserva.setSelectionForeground(Color.BLACK);
+                
+                
+                
 
                 break;
             }
